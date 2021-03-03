@@ -27,14 +27,15 @@
     <loaded-nodes>
       <connection connection-id="582c43a0-c684-47dd-a9a3-f716e20e4112">
         <schema name="information_schema" object-types="constraint, dataset trigger, function, sequence, table, index, view, column" />
-        <schema name="pg_catalog" object-types="function" />
+        <schema name="pg_catalog" object-types="function, table, view" />
         <schema name="public" object-types="function, sequence, table, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="582c43a0-c684-47dd-a9a3-f716e20e4112">
-      <console name="AWS_RDS" type="STANDARD" schema="information_schema" session="Main" />
+      <console name="AWS_RDS" type="STANDARD" schema="public" session="Main"><![CDATA[select * from "Album"
+select * from "Artist"]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
