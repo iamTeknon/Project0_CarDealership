@@ -1,6 +1,6 @@
 package com.automart.utilities;
 
-import com.automart.ui.User;
+import com.automart.ui.SignIn;
 
 import java.util.Scanner;
 
@@ -10,11 +10,8 @@ public class Driver {
 
     public static void main(String[] args) {
 
-        User user = new User();
-        user.setCustomerFirstName();
-        user.setCustomerLastName();
-        user.setCustomerPhoneNumber();
-        user.setCustomerEmail();
+        SignIn si = new SignIn();
+        si.signInOptions();
 
     }
 }

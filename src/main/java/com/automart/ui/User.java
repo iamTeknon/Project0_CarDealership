@@ -1,66 +1,29 @@
 package com.automart.ui;
 
 
-import com.automart.utilities.MyBinaryTree;
-
 import java.util.Scanner;
-// Regex code borrowed from https://owasp.org/www-community/OWASP_Validation_Regex_Repository
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// Regex code borrowed from https://owasp.org/www-community/OWASP_Validation_Regex_Repository
+
 public class User {
-    /*
-        TODO: CREATE FIELDS
-    */
-    // For log in
+
     private String customerFirstName;
     private String customerLastName;
     private String customerPhoneNumber;
     private String customerEmail;
-    private int keyNumber = 0;
-
-    // Additional info for registration
     private String customerStreetAddress;
     private String customerAddressCity;
     private String customerAddressState;
     private String customerAddressZip;
     private String password;
+    private int keyNumber = 0;
 
-    /*
-        TODO: CREATE CONSTRUCTOR(s)
-    */
     public User(){
     }
 
     Scanner scan = new Scanner(System.in);
-    MyBinaryTree bTree = new MyBinaryTree();
-
-    public void logInCheck(){
-        System.out.println("Enter 'r' to register for an account or 'l' to log in: ");
-        String initialOption = scan.nextLine();
-        if(initialOption.equalsIgnoreCase("r")){
-            // TODO: need to store this info in db
-            setCustomerFirstName();
-            setCustomerLastName();
-            setCustomerPhoneNumber();
-            setCustomerEmail();
-            setCustomerStreetAddress();
-            setCustomerAddressCity();
-            setCustomerAddressState();
-            setCustomerAddressZip();
-            setPassword();
-            setKeyNumber();
-            //bTree.addNode(this.keyNumber, this.customerFirstName);
-            logInCheck();
-        }else if(initialOption.equalsIgnoreCase("l")){
-            System.out.println("Please enter your email: ");
-            String logInEmail = scan.nextLine();
-            System.out.println("Please enter your password: ");
-            String logInPassword = scan.nextLine();
-            // TODO: Need to match entries to db info
-            // TODO: If no match then have them try 3 more times max
-        }
-    }
 
     public String getCustomerFirstName() {
         return customerFirstName;
