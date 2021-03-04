@@ -1,43 +1,45 @@
 package com.automart.db;
 
+import com.automart.ui.User;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class RowInsert {
+public class RowFiller {
     private final String url = "jdbc:postgresql://enterprise.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/myDB";
     private final String user = "postgres";
-    private final String password = "420Worship";
+    private final String password = "postgres";
 
-    private static final String INSERT_CUSTOMERS_SQL = "INSERT INTO customers" +
-            "  (id, name, email, country, password) VALUES " +
-            " (?, ?, ?, ?, ?);";
+    // Primary key column is auto-filled with auto-incrementation
+    private static final String INSERT_CUSTOMERS_SQL = "INSERT INTO customer_test_table4" +
+            " (last_name, first_name, phone_number, email, street_address, city, state, zip_code, password) VALUES" +
+            " (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-    public static void main(String[] argv) throws SQLException {
-        RowInsert createTableExample = new RowInsert();
-        createTableExample.insertRecord();
-    }
+    User u = new User();
 
-    public void insertRecord() throws SQLException {
+    public void insertRecord(String firstName, String lastName, String phoneNumber, String email,
+                             String address, String city, String state, String zip, String customerPassword) throws SQLException {
         System.out.println(INSERT_CUSTOMERS_SQL);
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager.getConnection(url, user, password);
 
-             // TODO: This is where I need to insert from customer registration
              // Step 2:Create a statement using connection object
-             /*PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CUSTOMERS_SQL)) {
-            preparedStatement.setInt(1, 1);
-            preparedStatement.setString(2, "Tony");
-            preparedStatement.setString(3, "tony@gmail.com");
-            preparedStatement.setString(4, "US");
-            preparedStatement.setString(5, "secret");*/
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CUSTOMERS_SQL)) {
+            preparedStatement.setString(1, lastName);
+            preparedStatement.setString(2, firstName);
+            preparedStatement.setString(3, phoneNumber);
+            preparedStatement.setString(4, email);
+            preparedStatement.setString(5, address);
+            preparedStatement.setString(6, city);
+            preparedStatement.setString(7, state);
+            preparedStatement.setString(8, zip);
+            preparedStatement.setString(9, customerPassword);
 
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-
             // print SQL exception information
             printSQLException(e);
         }

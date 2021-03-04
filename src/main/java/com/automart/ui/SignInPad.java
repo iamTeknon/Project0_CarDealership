@@ -1,35 +1,26 @@
 package com.automart.ui;
 
+import com.automart.registry.CustomerRegistry;
+
+import java.sql.SQLException;
 import java.util.Scanner;
 
-public class SignIn {
-    private boolean flag;
+public class SignInPad {
+    private static final Scanner scan = new Scanner(System.in);
 
-    public SignIn(){
+    public SignInPad(){
     }
 
-    Scanner scan = new Scanner(System.in);
     User user = new User();
+    CustomerRegistry cr = new CustomerRegistry();
 
     // TODO: Need to add an update account info option
-    public void signInOptions(){
+    public void signInOptions()throws SQLException {
         System.out.println("Enter 'r' to register for an account, 'l' for customer log in, " +
                 "or 'e' for employee log in: ");
         String initialOption = scan.nextLine();
         if(initialOption.equalsIgnoreCase("r")){
-            // TODO: need to store this info in db
-            user.setCustomerFirstName();
-            user.setCustomerLastName();
-            user.setCustomerPhoneNumber();
-            user.setCustomerEmail();
-            user.setCustomerStreetAddress();
-            user.setCustomerAddressCity();
-            user.setCustomerAddressState();
-            user.setCustomerAddressZip();
-            user.setPassword();
-            // TODO: This may be something done in db instead
-            user.setKeyNumber();
-            //bTree.addNode(this.keyNumber, this.customerFirstName);
+            cr.getRegistrationInfo();
             signInOptions();
 
             // The next 2 else-if statements need to re-direct to database
@@ -42,23 +33,23 @@ public class SignIn {
             // TODO: If no match then have them try 3 more times max
 
             // As long as everything is good with log in
-            this.flag = true;
+            boolean flag = true;
             while(flag) {
                 System.out.println("Enter 'v' to view cars for sale, 'm' to view cars you previously purchased," +
                         " 'p' to view remaining payments on a car, or 'e' to exit: ");
                 String viewOption = scan.nextLine();
 
                 if (viewOption.equalsIgnoreCase("v")) {
-                    this.flag = false;
+                    flag = false;
                     // jump to car registry db
                 } else if (viewOption.equalsIgnoreCase("m")) {
-                    this.flag = false;
+                    flag = false;
                     // jump to customer account registry db
                 } else if (viewOption.equalsIgnoreCase("p")) {
-                    this.flag = false;
+                    flag = false;
                     // jump to viewRemainng finance db
                 } else if (viewOption.equalsIgnoreCase("e")) {
-                    this.flag = false;
+                    flag = false;
                     signInOptions();
                 } else {
                     System.out.println("Please make sure you entered your choice correctly");

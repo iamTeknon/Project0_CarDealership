@@ -5,14 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-// edited code borrowed from Ramesh Fadatare
-public class CreateTable {
+public class TableMaker {
     private final String url = "jdbc:postgresql://enterprise.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/myDB";
     private final String user = "postgres";
-    private final String password = "420Worship";
+    private final String password = "postgres";
 
-    private static final String createTableSQL = "CREATE TABLE customers " +
-            "(ID INT PRIMARY KEY ," +
+    private static final String createTableSQL = "CREATE TABLE customer_test_table4 " +
+            "(CUSTOMER_ID SERIAL PRIMARY KEY," +
             " LAST_NAME TEXT, " +
             " FIRST_NAME TEXT, " +
             " PHONE_NUMBER VARCHAR(20), " +
@@ -23,6 +22,12 @@ public class CreateTable {
             " ZIP_CODE VARCHAR(10), " +
             " PASSWORD VARCHAR(20))";
 
+    public static void main(String[] args) throws SQLException {
+
+        TableMaker customerTable = new TableMaker();
+        customerTable.connection();
+
+    }
 
     public void connection() throws SQLException {
 
@@ -57,5 +62,6 @@ public class CreateTable {
             }
         }
     }
+
 }
 

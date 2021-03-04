@@ -24,11 +24,7 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="ce9355cd-0c5c-4c9e-b223-0ac928c7aa7f">
-        <schema name="public" object-types="function, index, sequence, view, table" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ce9355cd-0c5c-4c9e-b223-0ac928c7aa7f">
@@ -90,7 +86,7 @@
           <database value="myDB" />
           <type value="USER_PASSWORD" />
           <user value="postgres" />
-          <deprecated-pwd value="NDIwV29yc2hpcA==" />
+          <deprecated-pwd value="" />
         </database>
         <properties>
           <auto-commit value="false" />
