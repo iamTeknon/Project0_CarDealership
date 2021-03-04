@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -25,27 +25,28 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="582c43a0-c684-47dd-a9a3-f716e20e4112">
-        <schema name="information_schema" object-types="constraint, dataset trigger, function, sequence, table, index, view, column" />
-        <schema name="pg_catalog" object-types="function, table, view" />
-        <schema name="public" object-types="function, sequence, table, view" />
+      <connection connection-id="ce9355cd-0c5c-4c9e-b223-0ac928c7aa7f">
+        <schema name="public" object-types="function, index, sequence, view, table" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="582c43a0-c684-47dd-a9a3-f716e20e4112">
-      <console name="AWS_RDS" type="STANDARD" schema="public" session="Main"><![CDATA[select * from "Album"
-select * from "Artist"]]></console>
+    <connection id="ce9355cd-0c5c-4c9e-b223-0ac928c7aa7f">
+      <console name="Connection" type="STANDARD" schema="information_schema" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="582c43a0-c684-47dd-a9a3-f716e20e4112" />
+    <connection id="ce9355cd-0c5c-4c9e-b223-0ac928c7aa7f" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="582c43a0-c684-47dd-a9a3-f716e20e4112" dataset="information_schema.sql_features" active-filter-id="" />
+    <filter-actions connection-id="ce9355cd-0c5c-4c9e-b223-0ac928c7aa7f" dataset="public.users" active-filter-id="128e1650-cc3b-460b-aecc-16a2bdf6733d">
+      <filter id="128e1650-cc3b-460b-aecc-16a2bdf6733d" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="id" operator="=" value="" active="true" />
+      </filter>
+    </filter-actions>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -73,9 +74,9 @@ select * from "Artist"]]></console>
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="582c43a0-c684-47dd-a9a3-f716e20e4112" active="true">
+      <connection id="ce9355cd-0c5c-4c9e-b223-0ac928c7aa7f" active="true">
         <database>
-          <name value="AWS_RDS" />
+          <name value="Connection" />
           <description value="" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
@@ -84,11 +85,11 @@ select * from "Artist"]]></console>
           <driver-library value="" />
           <driver value="" />
           <url-type value="DATABASE" />
-          <host value="iamteknon.cxovyplivamc.us-east-2.rds.amazonaws.com" />
+          <host value="enterprise.cxovyplivamc.us-east-2.rds.amazonaws.com" />
           <port value="5432" />
-          <database value="postgres" />
+          <database value="myDB" />
           <type value="USER_PASSWORD" />
-          <user value="iamTeknon" />
+          <user value="postgres" />
           <deprecated-pwd value="NDIwV29yc2hpcA==" />
         </database>
         <properties>
