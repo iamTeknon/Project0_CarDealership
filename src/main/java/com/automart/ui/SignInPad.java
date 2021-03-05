@@ -32,11 +32,13 @@ public class SignInPad {
             // TODO: Need to match entries to db info
             // TODO: If no match then have them try 3 more times max
 
-            // As long as everything is good with log in
+            // looping flag in case customer doesn't enter available choices
             boolean flag = true;
             while(flag) {
+                // TODO: Need to do a select from db to view automart cars or cars they have
+                //      from automart (all columns)
                 System.out.println("Enter 'v' to view cars for sale, 'm' to view cars you previously purchased," +
-                        " 'p' to view remaining payments on a car, or 'e' to exit: ");
+                        " or 'e' to exit: ");
                 String viewOption = scan.nextLine();
 
                 if (viewOption.equalsIgnoreCase("v")) {

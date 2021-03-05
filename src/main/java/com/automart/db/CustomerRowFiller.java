@@ -6,18 +6,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class RowFiller {
+public class CustomerRowFiller {
     private final String url = "jdbc:postgresql://enterprise.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/myDB";
     private final String user = "postgres";
     private final String password = "postgres";
 
     // Primary key column is auto-filled with auto-incrementation
-    private static final String INSERT_CUSTOMERS_SQL = "INSERT INTO customer_test_table4" +
+    private static final String INSERT_CUSTOMERS_SQL = "INSERT INTO customers" +
             " (last_name, first_name, phone_number, email, street_address, city, state, zip_code, password) VALUES" +
             " (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     User u = new User();
 
+    // TODO: Need to created instantiation in Driver class and leave commented out
     public void insertRecord(String firstName, String lastName, String phoneNumber, String email,
                              String address, String city, String state, String zip, String customerPassword) throws SQLException {
         System.out.println(INSERT_CUSTOMERS_SQL);

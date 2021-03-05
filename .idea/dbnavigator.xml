@@ -24,25 +24,26 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="b04b8071-c982-43d7-9aca-ae602b865d47">
+        <schema name="pg_catalog" object-types="function" />
+        <schema name="public" object-types="index, view, dataset trigger, constraint, function, column, sequence, table" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="ce9355cd-0c5c-4c9e-b223-0ac928c7aa7f">
-      <console name="Connection" type="STANDARD" schema="information_schema" session="Main" />
+    <connection id="b04b8071-c982-43d7-9aca-ae602b865d47">
+      <console name="enterprise" type="STANDARD" schema="information_schema" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="ce9355cd-0c5c-4c9e-b223-0ac928c7aa7f" />
+    <connection id="b04b8071-c982-43d7-9aca-ae602b865d47" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="ce9355cd-0c5c-4c9e-b223-0ac928c7aa7f" dataset="public.users" active-filter-id="128e1650-cc3b-460b-aecc-16a2bdf6733d">
-      <filter id="128e1650-cc3b-460b-aecc-16a2bdf6733d" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
-        <condition column="id" operator="=" value="" active="true" />
-      </filter>
-    </filter-actions>
+    <filter-actions connection-id="b04b8071-c982-43d7-9aca-ae602b865d47" dataset="public.customers" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -70,9 +71,9 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="ce9355cd-0c5c-4c9e-b223-0ac928c7aa7f" active="true">
+      <connection id="b04b8071-c982-43d7-9aca-ae602b865d47" active="true">
         <database>
-          <name value="Connection" />
+          <name value="enterprise" />
           <description value="" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
@@ -86,7 +87,7 @@
           <database value="myDB" />
           <type value="USER_PASSWORD" />
           <user value="postgres" />
-          <deprecated-pwd value="" />
+          <deprecated-pwd value="cG9zdGdyZXM=" />
         </database>
         <properties>
           <auto-commit value="false" />

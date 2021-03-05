@@ -1,6 +1,6 @@
 package com.automart.registry;
 
-import com.automart.db.RowFiller;
+import com.automart.db.CustomerRowFiller;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ public class CustomerRegistry {
     public CustomerRegistry(){
     }
 
-    RowFiller rf = new RowFiller();
+    CustomerRowFiller rf = new CustomerRowFiller();
 
     public void getRegistrationInfo() throws SQLException {
         // TODO: Need to create a register method for this and then just call it
