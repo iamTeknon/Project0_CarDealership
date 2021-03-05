@@ -1,6 +1,6 @@
 package com.automart.registry;
 
-public class CarRegistry {
+public class CarRegistration {
     /*
         TODO: CREATE FIELDS
     */

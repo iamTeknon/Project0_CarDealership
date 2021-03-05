@@ -1,6 +1,6 @@
 package com.automart.ui;
 
-import com.automart.registry.CustomerRegistry;
+import com.automart.registry.CustomerRegistration;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -12,7 +12,7 @@ public class SignInPad {
     }
 
     User user = new User();
-    CustomerRegistry cr = new CustomerRegistry();
+    CustomerRegistration cr = new CustomerRegistration();
 
     // TODO: Need to add an update account info option
     public void signInOptions()throws SQLException {

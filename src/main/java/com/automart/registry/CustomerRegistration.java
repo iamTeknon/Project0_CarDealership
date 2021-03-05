@@ -7,22 +7,30 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomerRegistry {
+public class CustomerRegistration {
     private static final Scanner scan = new Scanner(System.in);
+    private static final CustomerRowFiller rm = new CustomerRowFiller();
+    private String email;
+    private String lastName;
+    private String firstName;
+    private String phoneNumber;
+    private String address;
+    private String city;
+    private String state;
+    private String zip;
+    private String password;
 
-    public CustomerRegistry(){
+    public CustomerRegistration(){
     }
-
-    CustomerRowFiller rf = new CustomerRowFiller();
 
     public void getRegistrationInfo() throws SQLException {
         // TODO: Need to create a register method for this and then just call it
         System.out.println("Howdy! Welcome to Automart! Please enter your first name: ");
-        String firstName = scan.nextLine();
+        firstName = scan.nextLine();
         System.out.println("Enter your last name: ");
-        String lastName = scan.nextLine();
+        lastName = scan.nextLine();
         boolean phoneNumberFlag = false;
-        String phoneNumber = "";
+        phoneNumber = "";
         while(!phoneNumberFlag){
             System.out.println("Enter your phone number, including area code: ");
             String phoneNumberCheck = scan.nextLine();
@@ -38,7 +46,7 @@ public class CustomerRegistry {
             }
         }
         boolean emailFlag = false;
-        String email = "";
+        email = "";
         while(!emailFlag){
             System.out.println("Enter your email: ");
             String emailCheck = scan.nextLine();
@@ -55,11 +63,11 @@ public class CustomerRegistry {
             }
         }
         System.out.println("Enter your street address: ");
-        String address = scan.nextLine();
+        address = scan.nextLine();
         System.out.println("Enter your city: ");
-        String city = scan.nextLine();
+        city = scan.nextLine();
         boolean stateFlag = false;
-        String state = "";
+        state = "";
         while(!stateFlag){
             System.out.println("Enter your state: ");
             String stateCheck = scan.nextLine();
@@ -80,7 +88,7 @@ public class CustomerRegistry {
             }
         }
         boolean zipFlag = false;
-        String zip = "";
+        zip = "";
         while(!zipFlag){
             System.out.println("Enter your zip code: ");
             String zipCheck = scan.nextLine();
@@ -96,7 +104,7 @@ public class CustomerRegistry {
             }
         }
         boolean passwordFlag = false;
-        String password = "";
+        password = "";
         while(!passwordFlag){
             System.out.println("Please enter a password that has at least 6 characters " +
                     "and at most 20 characters, including at least 1 capital letter and 1 number," +
@@ -115,6 +123,6 @@ public class CustomerRegistry {
                 passwordFlag = true;
             }
         }
-        rf.insertRecord(lastName, firstName, phoneNumber, email, address, city, state, zip, password);
+        rm.insertRecord(email, lastName, firstName, phoneNumber, address, city, state, zip, password);
     }
 }
