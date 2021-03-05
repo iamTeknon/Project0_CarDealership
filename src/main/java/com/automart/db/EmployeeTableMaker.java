@@ -12,11 +12,10 @@ public class EmployeeTableMaker {
 
     // TODO: Need to make email a composite key
     private static final String createTableSQL = "CREATE TABLE employees " +
-            "(EMPLOYEE_ID SERIAL PRIMARY KEY," +
+            "(EMAIL VARCHAR(50) PRIMARY KEY," +
             " LAST_NAME TEXT, " +
             " FIRST_NAME TEXT, " +
-            " PHONE_NUMBER VARCHAR(20), " +
-            " EMAIL VARCHAR(50)";
+            " PHONE_NUMBER VARCHAR(20)";
 
     public static void main(String[] args) throws SQLException {
 
