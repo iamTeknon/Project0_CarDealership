@@ -1,6 +1,5 @@
 package com.automart.db;
 
-import com.automart.ui.User;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,13 +12,11 @@ public class CustomerRowFiller {
 
     // Primary key column is auto-filled with auto-incrementation
     private static final String INSERT_CUSTOMERS_SQL = "INSERT INTO customers" +
-            " (last_name, first_name, phone_number, email, street_address, city, state, zip_code, password) VALUES" +
+            " (email, last_name, first_name, phone_number, street_address, city, state, zip_code, password) VALUES" +
             " (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-    User u = new User();
-
     // TODO: Need to created instantiation in Driver class and leave commented out
-    public void insertRecord(String firstName, String lastName, String phoneNumber, String email,
+    public void insertRecord(String email, String firstName, String lastName, String phoneNumber,
                              String address, String city, String state, String zip, String customerPassword) throws SQLException {
         System.out.println(INSERT_CUSTOMERS_SQL);
         // Step 1: Establishing a Connection
@@ -27,10 +24,10 @@ public class CustomerRowFiller {
 
              // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CUSTOMERS_SQL)) {
-            preparedStatement.setString(1, lastName);
-            preparedStatement.setString(2, firstName);
-            preparedStatement.setString(3, phoneNumber);
-            preparedStatement.setString(4, email);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, firstName);
+            preparedStatement.setString(4, phoneNumber);
             preparedStatement.setString(5, address);
             preparedStatement.setString(6, city);
             preparedStatement.setString(7, state);

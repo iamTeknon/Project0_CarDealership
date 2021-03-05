@@ -1,7 +1,5 @@
 package com.automart.db;
 
-import com.automart.ui.User;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,23 +12,21 @@ public class EmployeeRowFiller {
 
     // Primary key column is auto-filled with auto-incrementation
     private static final String INSERT_EMPLOYEES_SQL = "INSERT INTO employees" +
-            " (last_name, first_name, phone_number, email) VALUES" +
+            " (email, last_name, first_name, phone_number) VALUES" +
             " (?, ?, ?, ?);";
 
-    User u = new User();
-
-    public void insertRecord(String firstName, String lastName, String phoneNumber,
-                             String email) throws SQLException {
+    public void insertRecord(String email, String firstName, String lastName,
+                             String phoneNumber) throws SQLException {
         System.out.println(INSERT_EMPLOYEES_SQL);
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager.getConnection(url, user, password);
 
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_EMPLOYEES_SQL)) {
-            preparedStatement.setString(1, lastName);
-            preparedStatement.setString(2, firstName);
-            preparedStatement.setString(3, phoneNumber);
-            preparedStatement.setString(4, email);
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_EMPLOYEES_SQL)) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, firstName);
+            preparedStatement.setString(4, phoneNumber);
 
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query

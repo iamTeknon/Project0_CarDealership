@@ -11,11 +11,10 @@ public class CustomerTableMaker {
     private final String password = "postgres";
 
     private static final String createTableSQL = "CREATE TABLE customers " +
-            "(CUSTOMER_ID SERIAL PRIMARY KEY," +
+            "(EMAIL VARCHAR(50) PRIMARY KEY," +
             " LAST_NAME TEXT, " +
             " FIRST_NAME TEXT, " +
             " PHONE_NUMBER VARCHAR(20), " +
-            " EMAIL VARCHAR(50), " +
             " STREET_ADDRESS VARCHAR(50), " +
             " CITY TEXT, " +
             " STATE TEXT, " +

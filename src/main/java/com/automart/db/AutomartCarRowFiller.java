@@ -1,7 +1,5 @@
 package com.automart.db;
 
-import com.automart.ui.User;
-
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,8 +15,6 @@ public class AutomartCarRowFiller {
     private static final String INSERT_CARS_SQL = "INSERT INTO automart_cars" +
             " (year, make, model, color, price) VALUES" +
             " (?, ?, ?, ?, ?);";
-
-    User u = new User();
 
     public void insertRecord(int year, String make, String model, String color,
                              BigDecimal price) throws SQLException {
