@@ -6,19 +6,24 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class SignInPad {
-    private static final Scanner scan = new Scanner(System.in);
+    private String initialOption;
+    private String customerEmail;
+    private String customerPassword;
+    private String viewOption;
+    private String employeeEmail;
+    private String employeeLastName;
 
     public SignInPad(){
     }
 
-    User user = new User();
+    Scanner scan = new Scanner(System.in);
     CustomerRegistration cr = new CustomerRegistration();
 
     // TODO: Need to add an update account info option
-    public void signInOptions()throws SQLException {
+    public void signInOptions() throws SQLException {
         System.out.println("Enter 'r' to register for an account, 'l' for customer log in, " +
                 "or 'e' for employee log in: ");
-        String initialOption = scan.nextLine();
+        initialOption = scan.nextLine();
         if(initialOption.equalsIgnoreCase("r")){
             cr.getRegistrationInfo();
             signInOptions();
@@ -26,30 +31,31 @@ public class SignInPad {
             // The next 2 else-if statements need to re-direct to database
         }else if(initialOption.equalsIgnoreCase("l")){
             System.out.println("Please enter your email: ");
-            String logInEmail = scan.nextLine();
+            customerEmail = scan.nextLine();
             System.out.println("Please enter your password: ");
-            String logInPassword = scan.nextLine();
+            customerPassword = scan.nextLine();
             // TODO: Need to match entries to db info
             // TODO: If no match then have them try 3 more times max
 
-            // looping flag in case customer doesn't enter available choices
+            // As long as everything is good with log in
             boolean flag = true;
             while(flag) {
-                // TODO: Need to do a select from db to view automart cars or cars they have
-                //      from automart (all columns)
                 System.out.println("Enter 'v' to view cars for sale, 'm' to view cars you previously purchased," +
-                        " or 'e' to exit: ");
-                String viewOption = scan.nextLine();
+                        " 'p' to view remaining payments on a car, or 'e' to exit: ");
+                viewOption = scan.nextLine();
 
                 if (viewOption.equalsIgnoreCase("v")) {
                     flag = false;
-                    // jump to car registry db
+                    // TODO: Jump to car registry db
+
                 } else if (viewOption.equalsIgnoreCase("m")) {
                     flag = false;
-                    // jump to customer account registry db
+                    // TODO: Jump to customer account registry db
+
                 } else if (viewOption.equalsIgnoreCase("p")) {
                     flag = false;
-                    // jump to viewRemainng finance db
+                    // TODO: Jump to balance column in CustomerCars table
+
                 } else if (viewOption.equalsIgnoreCase("e")) {
                     flag = false;
                     signInOptions();
@@ -58,8 +64,10 @@ public class SignInPad {
                 }
             }
         }else if(initialOption.equalsIgnoreCase("e")){
-            System.out.println("Please enter your employee id: ");
-            String employeeID = scan.nextLine();
+            System.out.println("Please enter your email: ");
+            employeeEmail = scan.nextLine();
+            System.out.println("Please enter your last name: ");
+            employeeLastName = scan.nextLine();
 
             // TODO: Need to match entry to db info (pre-store this info)
             // TODO: If no match then have them try 3 more times max

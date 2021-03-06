@@ -1,6 +1,6 @@
 package com.automart.registry;
 
-import com.automart.db.CustomerRowFiller;
+import com.automart.db.fill.CustomerRowFiller;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -123,6 +123,6 @@ public class CustomerRegistration {
                 passwordFlag = true;
             }
         }
-        rm.insertRecord(email, lastName, firstName, phoneNumber, address, city, state, zip, password);
+        rm.insertRecord(lastName, firstName, phoneNumber, email, address, city, state, zip, password);
     }
 }

@@ -1,29 +1,31 @@
-package com.automart.db;
+package com.automart.db.create;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CustomerCarTableMaker {
-    private final String url = "jdbc:postgresql://enterprise.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/myDB";
+public class CustomerTableMaker {
+    private final String url = "jdbc:postgresql://enterprise2102.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/aws";
     private final String user = "postgres";
     private final String password = "postgres";
 
-    // TODO: Need to make CUSTOMER_ID a Foreign key to customers table
-    private static final String createTableSQL = "CREATE TABLE customer_cars " +
-            "(EMAIL VARCHAR(50) PRIMARY KEY REFERENCES customers(email)," +
-            " YEAR INT, " +
-            " MAKE TEXT, " +
-            " MODEL TEXT, " +
-            " COLOR TEXT, " +
-            " MONTHLY_PAYMENTS NUMERIC(10,2), " +
-            " BALANCE NUMERIC(10,2)";
+    private static final String createTableSQL = "CREATE TABLE project0.customers_test1 " +
+            "(CUSTOMER_ID SERIAL PRIMARY KEY," +
+            " LAST_NAME TEXT, " +
+            " FIRST_NAME TEXT, " +
+            " PHONE_NUMBER VARCHAR(20), " +
+            " EMAIL VARCHAR(50) UNIQUE, " +
+            " STREET_ADDRESS VARCHAR(50), " +
+            " CITY TEXT, " +
+            " STATE TEXT, " +
+            " ZIP_CODE VARCHAR(10), " +
+            " PASSWORD VARCHAR(20))";
 
     public static void main(String[] args) throws SQLException {
 
-        CustomerCarTableMaker cctm = new CustomerCarTableMaker();
-        cctm.connection();
+        CustomerTableMaker ctm = new CustomerTableMaker();
+        ctm.connection();
 
     }
 
@@ -60,4 +62,6 @@ public class CustomerCarTableMaker {
             }
         }
     }
+
 }
+

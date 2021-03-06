@@ -1,6 +1,6 @@
 package com.automart.registry;
 
-import com.automart.db.CustomerCarRowFiller;
+import com.automart.db.fill.CustomerCarRowFiller;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;

@@ -1,49 +1,42 @@
-package com.automart.db;
+package com.automart.db.fill;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class CustomerTableMaker {
-    private final String url = "jdbc:postgresql://enterprise.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/myDB";
+public class EmployeeRowFiller {
+    private final String url = "jdbc:postgresql://enterprise2102.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/aws";
     private final String user = "postgres";
     private final String password = "postgres";
 
-    private static final String createTableSQL = "CREATE TABLE customers " +
-            "(EMAIL VARCHAR(50) PRIMARY KEY," +
-            " LAST_NAME TEXT, " +
-            " FIRST_NAME TEXT, " +
-            " PHONE_NUMBER VARCHAR(20), " +
-            " STREET_ADDRESS VARCHAR(50), " +
-            " CITY TEXT, " +
-            " STATE TEXT, " +
-            " ZIP_CODE VARCHAR(10), " +
-            " PASSWORD VARCHAR(20))";
+    // Primary key column is auto-filled with auto-incrementation
+    private static final String INSERT_EMPLOYEES_SQL = "INSERT INTO project0.employees" +
+            " (email, last_name, first_name, phone_number) VALUES" +
+            " (?, ?, ?, ?);";
 
-    public static void main(String[] args) throws SQLException {
-
-        CustomerTableMaker ctm = new CustomerTableMaker();
-        ctm.connection();
-
-    }
-
-    public void connection() throws SQLException {
-
-        System.out.println(createTableSQL);
+    public void insertRecord(String email, String firstName, String lastName,
+                             String phoneNumber) throws SQLException {
+        System.out.println(INSERT_EMPLOYEES_SQL);
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager.getConnection(url, user, password);
 
              // Step 2:Create a statement using connection object
-             Statement statement = connection.createStatement();) {
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_EMPLOYEES_SQL)) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, firstName);
+            preparedStatement.setString(4, phoneNumber);
 
+            System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
-            statement.execute(createTableSQL);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
-
             // print SQL exception information
             printSQLException(e);
         }
+
+        // Step 4: try-with-resource statement will auto close the connection.
     }
 
     public static void printSQLException(SQLException ex) {
@@ -61,6 +54,4 @@ public class CustomerTableMaker {
             }
         }
     }
-
 }
-

@@ -25,24 +25,21 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="b04b8071-c982-43d7-9aca-ae602b865d47">
-        <schema name="public" object-types="table, view" />
+      <connection connection-id="602c278c-f309-446e-b99c-fb31f767d862">
+        <schema name="project0" object-types="table, function, view, sequence" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="b04b8071-c982-43d7-9aca-ae602b865d47">
-      <console name="enterprise" type="STANDARD" schema="information_schema" session="Main" />
+    <connection id="602c278c-f309-446e-b99c-fb31f767d862">
+      <console name="2102Enterprise" type="STANDARD" schema="public" session="Main"><![CDATA[show search_path;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="b04b8071-c982-43d7-9aca-ae602b865d47" />
-  </component>
-  <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="b04b8071-c982-43d7-9aca-ae602b865d47" dataset="public.customers" active-filter-id="EMPTY_FILTER" />
+    <connection id="602c278c-f309-446e-b99c-fb31f767d862" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -66,13 +63,15 @@
     <filters />
   </component>
   <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
-    <recently-used-interfaces />
+    <recently-used-interfaces>
+      <mapping database-type="POSTGRES" interface-id="DEFAULT" />
+    </recently-used-interfaces>
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="b04b8071-c982-43d7-9aca-ae602b865d47" active="true">
+      <connection id="602c278c-f309-446e-b99c-fb31f767d862" active="true">
         <database>
-          <name value="enterprise" />
+          <name value="2102Enterprise" />
           <description value="" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
@@ -81,9 +80,9 @@
           <driver-library value="" />
           <driver value="" />
           <url-type value="DATABASE" />
-          <host value="enterprise.cxovyplivamc.us-east-2.rds.amazonaws.com" />
+          <host value="enterprise2102.cxovyplivamc.us-east-2.rds.amazonaws.com" />
           <port value="5432" />
-          <database value="myDB" />
+          <database value="postgres" />
           <type value="USER_PASSWORD" />
           <user value="postgres" />
           <deprecated-pwd value="cG9zdGdyZXM=" />

@@ -1,4 +1,4 @@
-package com.automart.db;
+package com.automart.db.fill;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -7,12 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class CustomerCarRowFiller {
-    private final String url = "jdbc:postgresql://enterprise.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/myDB";
+    private final String url = "jdbc:postgresql://enterprise2102.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/aws";
     private final String user = "postgres";
     private final String password = "postgres";
 
     // Primary key column is auto-filled with auto-incrementation
-    private static final String INSERT_CARS_SQL = "INSERT INTO customer_cars" +
+    private static final String INSERT_CARS_SQL = "INSERT INTO project0.customer_cars" +
             " (email, year, make, model, color, monthly_payment, balance) VALUES" +
             " (?, ?, ?, ?, ?, ?, ?);";
 

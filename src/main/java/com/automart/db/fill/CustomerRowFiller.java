@@ -1,34 +1,38 @@
-package com.automart.db;
+package com.automart.db.fill;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class AutomartCarRowFiller {
-    private final String url = "jdbc:postgresql://enterprise.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/myDB";
+public class CustomerRowFiller {
+    private final String url = "jdbc:postgresql://enterprise2102.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/aws";
     private final String user = "postgres";
     private final String password = "postgres";
 
     // Primary key column is auto-filled with auto-incrementation
-    private static final String INSERT_CARS_SQL = "INSERT INTO automart_cars" +
-            " (year, make, model, color, price) VALUES" +
-            " (?, ?, ?, ?, ?);";
+    private static final String INSERT_CUSTOMERS_SQL = "INSERT INTO project0.customers_test1" +
+            " (last_name, first_name, phone_number, email, street_address, city, state, zip_code, password) VALUES" +
+            " (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-    public void insertRecord(int year, String make, String model, String color,
-                             BigDecimal price) throws SQLException {
-        System.out.println(INSERT_CARS_SQL);
+    // TODO: Need to created instantiation in Driver class and leave commented out
+    public void insertRecord(String lastName, String firstName, String phoneNumber, String email,
+                             String address, String city, String state, String zip, String customerPassword) throws SQLException {
+        System.out.println(INSERT_CUSTOMERS_SQL);
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager.getConnection(url, user, password);
 
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CARS_SQL)) {
-            preparedStatement.setInt(1, year);
-            preparedStatement.setString(2, make);
-            preparedStatement.setString(3, model);
-            preparedStatement.setString(4, color);
-            preparedStatement.setBigDecimal(5, price);
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CUSTOMERS_SQL)) {
+            preparedStatement.setString(1, lastName);
+            preparedStatement.setString(2, firstName);
+            preparedStatement.setString(3, phoneNumber);
+            preparedStatement.setString(4, email);
+            preparedStatement.setString(5, address);
+            preparedStatement.setString(6, city);
+            preparedStatement.setString(7, state);
+            preparedStatement.setString(8, zip);
+            preparedStatement.setString(9, customerPassword);
 
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
