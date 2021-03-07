@@ -14,9 +14,9 @@ import java.util.regex.Pattern;
 public class CustomerRegistration {
     private static final Scanner scan = new Scanner(System.in);
     private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementDao();
-    private String email;
     private String lastName;
     private String firstName;
+    private String email;
     private String phoneNumber;
     private String address;
     private String city;
@@ -29,7 +29,7 @@ public class CustomerRegistration {
 
     public void getCustomerInfo() throws SQLException {
 
-        System.out.println("Howdy! Welcome to Automart! Please enter your first name: ");
+        System.out.println("Howdy! Welcome to Automart! \nPlease enter your first name: ");
         firstName = scan.nextLine();
         System.out.println("Enter your last name: ");
         lastName = scan.nextLine();
@@ -107,15 +107,13 @@ public class CustomerRegistration {
                 System.out.println("Invalid zipcode entry");
             }
         }
-        System.out.println("Please enter your Social Security Number without dashes: ");
-        id = scan.nextInt();
-        scan.nextLine();
 
-        Customer customer = new Customer(id, lastName, firstName, phoneNumber, email, address, city, state, zip);
-        addCustomer(customer).ifPresent(customer::setId);
+        Customer customer = new Customer(lastName, firstName, email, phoneNumber, address, city, state, zip);
+        addCustomer(customer);
     }
 
-    // The following code was borrowed from Hiram Kamau
+    // The following code was borrowed from Hiram Kamau and modified for this project
+    // https://stackabuse.com/working-with-postgresql-in-java/
     public static Optional<Integer> addCustomer(Customer customer) {
         return CUSTOMER_DAO.save(customer);
     }

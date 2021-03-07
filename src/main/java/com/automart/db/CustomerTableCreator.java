@@ -6,17 +6,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 // The following code was borrowed from Ramesh Fadatare and modified for this project
+// https://www.javaguides.net/2020/02/java-jdbc-postgresql-create-table.html
 public class CustomerTableCreator {
     private final String url = "jdbc:postgresql://enterprise2102.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/aws";
     private final String user = "postgres";
     private final String password = "postgres";
 
     private static final String createTableSQL = "CREATE TABLE project0.customers_test1 " +
-            "(CUSTOMER_ID SERIAL PRIMARY KEY," +
+            "(CUSTOMER_ID SERIAL PRIMARY KEY, " +
             " LAST_NAME TEXT, " +
             " FIRST_NAME TEXT, " +
-            " PHONE_NUMBER VARCHAR(20), " +
             " EMAIL VARCHAR(50) UNIQUE, " +
+            " PHONE_NUMBER VARCHAR(20), " +
             " STREET_ADDRESS VARCHAR(50), " +
             " CITY TEXT, " +
             " STATE TEXT, " +

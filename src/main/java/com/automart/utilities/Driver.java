@@ -14,13 +14,14 @@ import java.util.Scanner;
 
 public class Driver {
 
-    Scanner scan = new Scanner(System.in);
+    private static final Scanner scan = new Scanner(System.in);
+    private static final SignInPad sip = new SignInPad();
     private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementDao();
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, NonExistentEntityException {
 
-        SignInPad si = new SignInPad();
-        si.signInOptions();
+
+        sip.signInOptions();
 
 //        EmployeeRegistration er = new EmployeeRegistration();
 //        er.getEmployeeInfo();
@@ -30,10 +31,14 @@ public class Driver {
         // But, if the customer does exist, the details will be printed
         // on the console
 //        try {
-//            Customer customer = getCustomer(6);
+//            Customer customer = getCustomer(1);
+//            customer.setEmail("agapeteknon333@gmail.com");
+//            customer.setId(1);
+//            updateCustomer(customer);
 //        } catch (NonExistentEntityException ex) {
 //            ex.getStackTrace();
 //        }
+
 //
 //        // Test whether a customer can be added to the database
 //        Customer firstCustomer =

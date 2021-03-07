@@ -1,5 +1,6 @@
 package com.automart.ui;
 
+import com.automart.exceptions.NonExistentEntityException;
 import com.automart.registry.CustomerRegistration;
 import com.automart.registry.UpdateCustomerInfo;
 
@@ -19,7 +20,7 @@ public class SignInPad {
     }
 
     // TODO: Need to add an update account info option
-    public void signInOptions() throws SQLException {
+    public void signInOptions() throws SQLException, NonExistentEntityException {
         System.out.println("Enter " +
                 "'r' to register for a customer account, " +
                 "'u' to update your customer account, " +
@@ -31,8 +32,11 @@ public class SignInPad {
             cr.getCustomerInfo();
             signInOptions();
         }else if(initialOption.equalsIgnoreCase("u")){
+            System.out.println("Please enter the customer id number: ");
+            int id = scan.nextInt();
+            scan.nextLine();
             UpdateCustomerInfo uci = new UpdateCustomerInfo();
-            uci.updateInfo();
+            uci.updateInfo(id);
             // The next 2 else-if statements need to re-direct to database
         }else if(initialOption.equalsIgnoreCase("l")){
             System.out.println("Please enter your email: ");
@@ -80,4 +84,6 @@ public class SignInPad {
             signInOptions();
         }
     }
+
+
 }

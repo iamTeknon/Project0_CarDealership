@@ -23,7 +23,7 @@ public class ImplementDao implements Dao<Customer, Integer>{
         String message = "The customer to be added should not be null";
         Customer nonNullCustomer = Objects.requireNonNull(customer, message);
         String sql = "INSERT INTO "
-                + "project0.customers_test1(last_name, first_name, phone_number, email, " +
+                + "project0.customers_test1(last_name, first_name, email, phone_number, " +
                 "street_address, city, state, zip_code) "
                 + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -34,11 +34,10 @@ public class ImplementDao implements Dao<Customer, Integer>{
                          conn.prepareStatement(
                                  sql,
                                  Statement.RETURN_GENERATED_KEYS)) {
-
-                statement.setString(1, nonNullCustomer.getFirstName());
-                statement.setString(2, nonNullCustomer.getLastName());
-                statement.setString(3, nonNullCustomer.getPhone());
-                statement.setString(4, nonNullCustomer.getEmail());
+                statement.setString(1, nonNullCustomer.getLastName());
+                statement.setString(2, nonNullCustomer.getFirstName());
+                statement.setString(3, nonNullCustomer.getEmail());
+                statement.setString(4, nonNullCustomer.getPhone());
                 statement.setString(5, nonNullCustomer.getAddress());
                 statement.setString(6, nonNullCustomer.getCity());
                 statement.setString(7, nonNullCustomer.getState());
@@ -65,26 +64,26 @@ public class ImplementDao implements Dao<Customer, Integer>{
     public Optional<Customer> get(int id) {
         return connection.flatMap(conn -> {
             Optional<Customer> customer = Optional.empty();
-            //String sql = "SELECT * FROM project0.customers_test1 WHERE customer_id = " + id;
-            String sql = "SELECT customer_id, last_name, first_name, phone_number, email, street_address," +
+            String sql = "SELECT customer_id, last_name, first_name, email, phone_number, street_address," +
                     " city, state, zip_code FROM project0.customers_test1 WHERE customer_id = " + id;
             try (Statement statement = conn.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
 
                 if (resultSet.next()) {
                     int customer_id = resultSet.getInt("customer_id");
-                    String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
+                    String firstName = resultSet.getString("first_name");
                     String email = resultSet.getString("email");
                     String phone = resultSet.getString("phone_number");
                     String address = resultSet.getString("street_address");
                     String city = resultSet.getString("city");
                     String state = resultSet.getString("state");
                     String zip  = resultSet.getString("zip_code");
-                    System.out.println(customer_id + ", " + lastName + ", " + firstName + ", " + phone + ", "
-                            + email + ", " + address + ", " + city + ", " + state + ", " + zip);
+                    System.out.println(customer_id + "  " +  lastName + ", " + firstName + "  " + email
+                            + "  " + phone + "  " + address + "  " + city + "  " + state + "  " + zip);
+
                     customer = Optional.of(
-                            new Customer(customer_id, lastName, firstName, phone, email,
+                            new Customer(lastName, firstName, email, phone,
                                     address, city, state, zip));
                 }
             } catch (SQLException ex) {
@@ -112,10 +111,10 @@ public class ImplementDao implements Dao<Customer, Integer>{
                     String city = resultSet.getString("city");
                     String state = resultSet.getString("state");
                     String zip  = resultSet.getString("zip_code");
-//                    System.out.println(customer_id + ", " + lastName + ", " + firstName + ", " + phone + ", "
-//                            + email + ", " + address + ", " + city + ", " + state + ", " + zip);
+                    System.out.println(customer_id + ", " + lastName + ", " + firstName + ", " + email
+                            + ", " +  phone + ", " +  address + ", " + city + ", " + state + ", " + zip);
 
-                    Customer customer = new Customer(customer_id, firstName, lastName, phone, email,
+                    Customer customer = new Customer(lastName, firstName, email, phone,
                             address, city, state, zip);
 
                     customers.add(customer);
@@ -135,8 +134,8 @@ public class ImplementDao implements Dao<Customer, Integer>{
                 + "SET "
                 + "last_name = ?, "
                 + "first_name = ?, "
-                + "phone_number = ?, "
                 + "email = ?, "
+                + "phone_number = ?, "
                 + "street_address = ?, "
                 + "city = ?, "
                 + "state = ?, "
@@ -147,10 +146,10 @@ public class ImplementDao implements Dao<Customer, Integer>{
         connection.ifPresent(conn -> {
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
 
-                statement.setString(1, nonNullCustomer.getFirstName());
-                statement.setString(2, nonNullCustomer.getLastName());
-                statement.setString(3, nonNullCustomer.getPhone());
-                statement.setString(4, nonNullCustomer.getEmail());
+                statement.setString(1, nonNullCustomer.getLastName());
+                statement.setString(2, nonNullCustomer.getFirstName());
+                statement.setString(3, nonNullCustomer.getEmail());
+                statement.setString(4, nonNullCustomer.getPhone());
                 statement.setString(5, nonNullCustomer.getAddress());
                 statement.setString(6, nonNullCustomer.getCity());
                 statement.setString(7, nonNullCustomer.getState());
