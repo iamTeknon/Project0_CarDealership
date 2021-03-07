@@ -1,27 +1,30 @@
-package com.automart.db.create;
+package com.automart.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class AutomartCarTableMaker {
+// The following code was borrowed from Ramesh Fadatare and modified for this project
+public class CustomerCarTableCreator {
     private final String url = "jdbc:postgresql://enterprise2102.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/aws";
     private final String user = "postgres";
     private final String password = "postgres";
 
-    private static final String createTableSQL = "CREATE TABLE project0.automart_cars " +
-            "(AUTOMART_CAR_ID SERIAL PRIMARY KEY," +
+    // TODO: Need to make CUSTOMER_ID a Foreign key to customers table
+    private static final String createTableSQL = "CREATE TABLE project0.customer_cars_test1 " +
+            "(EMAIL VARCHAR(50) PRIMARY KEY REFERENCES project0.customers_test1(email)," +
             " YEAR INT, " +
             " MAKE TEXT, " +
             " MODEL TEXT, " +
             " COLOR TEXT, " +
-            " PRICE NUMERIC(10, 2)";
+            " MONTHLY_PAYMENTS NUMERIC(10,2), " +
+            " BALANCE NUMERIC(10,2))";
 
     public static void main(String[] args) throws SQLException {
 
-        AutomartCarTableMaker actm = new AutomartCarTableMaker();
-        actm.connection();
+        CustomerCarTableCreator cctm = new CustomerCarTableCreator();
+        cctm.connection();
 
     }
 

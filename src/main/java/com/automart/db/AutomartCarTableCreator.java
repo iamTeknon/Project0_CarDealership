@@ -1,26 +1,28 @@
-package com.automart.db.create;
+package com.automart.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class EmployeeTableMaker {
+// The following code was borrowed from Ramesh Fadatare and modified for this project
+public class AutomartCarTableCreator {
     private final String url = "jdbc:postgresql://enterprise2102.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/aws";
     private final String user = "postgres";
     private final String password = "postgres";
 
-    // TODO: Need to make email a composite key
-    private static final String createTableSQL = "CREATE TABLE project0.employees " +
-            "(EMAIL VARCHAR(50) PRIMARY KEY," +
-            " LAST_NAME TEXT, " +
-            " FIRST_NAME TEXT, " +
-            " PHONE_NUMBER VARCHAR(20)";
+    private static final String createTableSQL = "CREATE TABLE project0.automart_cars_test1 " +
+            "(AUTOMART_CAR_ID SERIAL PRIMARY KEY," +
+            " YEAR INT, " +
+            " MAKE TEXT, " +
+            " MODEL TEXT, " +
+            " COLOR TEXT, " +
+            " PRICE NUMERIC(10, 2))";
 
     public static void main(String[] args) throws SQLException {
 
-        EmployeeTableMaker etm = new EmployeeTableMaker();
-        etm.connection();
+        AutomartCarTableCreator actm = new AutomartCarTableCreator();
+        actm.connection();
 
     }
 

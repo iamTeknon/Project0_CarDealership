@@ -1,38 +1,33 @@
-package com.automart.db.fill;
+package com.automart.jdbc.fill;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class CustomerRowFiller {
+// The following code was borrowed from Ramesh Fadatare and modified for this project
+public class EmployeeRowFiller {
     private final String url = "jdbc:postgresql://enterprise2102.cxovyplivamc.us-east-2.rds.amazonaws.com:5432/aws";
     private final String user = "postgres";
     private final String password = "postgres";
 
     // Primary key column is auto-filled with auto-incrementation
-    private static final String INSERT_CUSTOMERS_SQL = "INSERT INTO project0.customers_test1" +
-            " (last_name, first_name, phone_number, email, street_address, city, state, zip_code, password) VALUES" +
-            " (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private static final String INSERT_EMPLOYEES_SQL = "INSERT INTO project0.employees_test1" +
+            " (last_name, first_name, email, phone_number) VALUES" +
+            " (?, ?, ?, ?);";
 
-    // TODO: Need to created instantiation in Driver class and leave commented out
-    public void insertRecord(String lastName, String firstName, String phoneNumber, String email,
-                             String address, String city, String state, String zip, String customerPassword) throws SQLException {
-        System.out.println(INSERT_CUSTOMERS_SQL);
+    public void insertRecord(String lastName, String firstName, String email,
+                             String phoneNumber) throws SQLException {
+        System.out.println(INSERT_EMPLOYEES_SQL);
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager.getConnection(url, user, password);
 
              // Step 2:Create a statement using connection object
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CUSTOMERS_SQL)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_EMPLOYEES_SQL)) {
             preparedStatement.setString(1, lastName);
             preparedStatement.setString(2, firstName);
-            preparedStatement.setString(3, phoneNumber);
-            preparedStatement.setString(4, email);
-            preparedStatement.setString(5, address);
-            preparedStatement.setString(6, city);
-            preparedStatement.setString(7, state);
-            preparedStatement.setString(8, zip);
-            preparedStatement.setString(9, customerPassword);
+            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, phoneNumber);
 
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query

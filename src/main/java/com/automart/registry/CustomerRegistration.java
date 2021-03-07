@@ -1,15 +1,19 @@
 package com.automart.registry;
 
-import com.automart.db.fill.CustomerRowFiller;
+import com.automart.jdbc.crud.Dao;
+import com.automart.jdbc.crud.ImplementDao;
+import com.automart.jdbc.entities.Customer;
 
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// Regex code borrowed from https://owasp.org/www-community/OWASP_Validation_Regex_Repository
 public class CustomerRegistration {
     private static final Scanner scan = new Scanner(System.in);
-    private static final CustomerRowFiller rm = new CustomerRowFiller();
+    private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementDao();
     private String email;
     private String lastName;
     private String firstName;
@@ -18,13 +22,13 @@ public class CustomerRegistration {
     private String city;
     private String state;
     private String zip;
-    private String password;
+    private int id;
 
     public CustomerRegistration(){
     }
 
-    public void getRegistrationInfo() throws SQLException {
-        // TODO: Need to create a register method for this and then just call it
+    public void getCustomerInfo() throws SQLException {
+
         System.out.println("Howdy! Welcome to Automart! Please enter your first name: ");
         firstName = scan.nextLine();
         System.out.println("Enter your last name: ");
@@ -103,26 +107,16 @@ public class CustomerRegistration {
                 System.out.println("Invalid zipcode entry");
             }
         }
-        boolean passwordFlag = false;
-        password = "";
-        while(!passwordFlag){
-            System.out.println("Please enter a password that has at least 6 characters " +
-                    "and at most 20 characters, including at least 1 capital letter and 1 number," +
-                    "with no spaces: ");
-            String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$";
-            String passwordCheck = scan.nextLine();
-            Pattern p = Pattern.compile(regex);
-            Matcher m = p.matcher(passwordCheck);
+        System.out.println("Please enter your Social Security Number without dashes: ");
+        id = scan.nextInt();
+        scan.nextLine();
 
-            // TODO: Need to figure out why it says invalid password as soon as it gets here
-            if(!m.matches()){
-                System.out.println("Invalid password entry");
-            }
-            else{
-                password = passwordCheck;
-                passwordFlag = true;
-            }
-        }
-        rm.insertRecord(lastName, firstName, phoneNumber, email, address, city, state, zip, password);
+        Customer customer = new Customer(id, lastName, firstName, phoneNumber, email, address, city, state, zip);
+        addCustomer(customer).ifPresent(customer::setId);
+    }
+
+    // The following code was borrowed from Hiram Kamau
+    public static Optional<Integer> addCustomer(Customer customer) {
+        return CUSTOMER_DAO.save(customer);
     }
 }

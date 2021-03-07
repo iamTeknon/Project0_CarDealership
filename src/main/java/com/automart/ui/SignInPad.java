@@ -1,11 +1,13 @@
 package com.automart.ui;
 
 import com.automart.registry.CustomerRegistration;
+import com.automart.registry.UpdateCustomerInfo;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class SignInPad {
+    private static final Scanner scan = new Scanner(System.in);
     private String initialOption;
     private String customerEmail;
     private String customerPassword;
@@ -16,18 +18,21 @@ public class SignInPad {
     public SignInPad(){
     }
 
-    Scanner scan = new Scanner(System.in);
-    CustomerRegistration cr = new CustomerRegistration();
-
     // TODO: Need to add an update account info option
     public void signInOptions() throws SQLException {
-        System.out.println("Enter 'r' to register for an account, 'l' for customer log in, " +
-                "or 'e' for employee log in: ");
+        System.out.println("Enter " +
+                "'r' to register for a customer account, " +
+                "'u' to update your customer account, " +
+                "'l' for customer log in, or " +
+                "'e' for employee log in: ");
         initialOption = scan.nextLine();
-        if(initialOption.equalsIgnoreCase("r")){
-            cr.getRegistrationInfo();
+        if(initialOption.equalsIgnoreCase("r")) {
+            CustomerRegistration cr = new CustomerRegistration();
+            cr.getCustomerInfo();
             signInOptions();
-
+        }else if(initialOption.equalsIgnoreCase("u")){
+            UpdateCustomerInfo uci = new UpdateCustomerInfo();
+            uci.updateInfo();
             // The next 2 else-if statements need to re-direct to database
         }else if(initialOption.equalsIgnoreCase("l")){
             System.out.println("Please enter your email: ");

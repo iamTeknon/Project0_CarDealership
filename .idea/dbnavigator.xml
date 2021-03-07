@@ -26,7 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="602c278c-f309-446e-b99c-fb31f767d862">
-        <schema name="project0" object-types="table, function, view, sequence" />
+        <schema name="project0" object-types="table, view, sequence, function" />
       </connection>
     </loaded-nodes>
   </component>
@@ -88,7 +88,7 @@
           <deprecated-pwd value="cG9zdGdyZXM=" />
         </database>
         <properties>
-          <auto-commit value="false" />
+          <auto-commit value="true" />
         </properties>
         <ssh-settings>
           <active value="false" />

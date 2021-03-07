@@ -1,4 +1,4 @@
-package com.automart.haggling;
+package com.automart.finance;
 
 public class Offers {
     /*
