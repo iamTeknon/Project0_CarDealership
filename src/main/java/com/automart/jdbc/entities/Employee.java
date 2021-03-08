@@ -60,7 +60,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Customer["
+        return "Employee["
                 + "id = " + id
                 + "lastName = " + firstName
                 + ", firstName = " + lastName

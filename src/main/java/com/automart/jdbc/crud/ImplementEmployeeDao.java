@@ -131,7 +131,7 @@ public class ImplementEmployeeDao implements Dao<Employee, Integer>{
                     statement.setString(2, nonNullEmployee.getFirstName());
                     statement.setString(3, nonNullEmployee.getEmail());
                     statement.setString(4, nonNullEmployee.getPhone());
-                    statement.setInt(9, nonNullEmployee.getId());
+                    statement.setInt(5, nonNullEmployee.getId());
 
                     int numberOfUpdatedRows = statement.executeUpdate();
 

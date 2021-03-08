@@ -11,7 +11,7 @@ public class AutomartCarTableCreator {
     private final String user = "postgres";
     private final String password = "postgres";
 
-    private static final String createTableSQL = "CREATE TABLE project0.automart_cars_test1 " +
+    private static final String createTableSQL = "CREATE TABLE project0.automart_cars " +
             "(AUTOMART_CAR_ID SERIAL PRIMARY KEY," +
             " YEAR INT, " +
             " MAKE TEXT, " +

@@ -3,7 +3,6 @@ package com.automart.registry;
 import com.automart.jdbc.crud.Dao;
 import com.automart.jdbc.crud.ImplementEmployeeDao;
 import com.automart.jdbc.entities.Employee;
-import com.automart.jdbc.fill.EmployeeRowFiller;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -22,8 +21,6 @@ public class EmployeeRegistration {
 
     public EmployeeRegistration(){
     }
-
-    EmployeeRowFiller erf = new EmployeeRowFiller();
 
     public void getEmployeeInfo() throws SQLException {
         System.out.println("Enter employee first name: ");
