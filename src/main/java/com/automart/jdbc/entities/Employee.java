@@ -1,30 +1,21 @@
 package com.automart.jdbc.entities;
 
-public class Customer {
+public class Employee {
     private Integer id;
     private String lastName;
     private String firstName;
     private String email;
     private String phone;
-    private String address;
-    private String city;
-    private String state;
-    private String zip;
 
-    public Customer(){
+    public Employee() {
     }
 
-    public Customer(Integer id, String firstName, String lastName, String email,
-                    String phone, String address,
-                    String city, String state, String zip) {
+    public Employee(Integer id, String firstName, String lastName, String email,
+                    String phone) {
         this.firstName = lastName;
         this.lastName = firstName;
         this.email = email;
         this.phone = phone;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
     }
 
     public void setLastName(String lastName) {
@@ -41,22 +32,6 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
     }
 
     public void setId(int id) {
@@ -83,22 +58,6 @@ public class Customer {
         return phone;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
     @Override
     public String toString() {
         return "Customer["
@@ -107,12 +66,7 @@ public class Customer {
                 + ", firstName = " + lastName
                 + ", email = " + email
                 + ", phone = " + phone
-                + ", address = " + address
-                + ", city = " + city
-                + ", state = " + state
-                + ", zip = " + zip
                 + "]";
-
     }
 }
 

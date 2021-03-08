@@ -12,10 +12,10 @@ public class CustomerTableCreator {
     private final String user = "postgres";
     private final String password = "postgres";
 
-    private static final String createTableSQL = "CREATE TABLE project0.customers_test1 " +
+    private static final String createTableSQL = "CREATE TABLE project0.customers " +
             "(CUSTOMER_ID SERIAL PRIMARY KEY, " +
-            " LAST_NAME TEXT, " +
-            " FIRST_NAME TEXT, " +
+            " FIRST_NAME VARCHAR(50), " +
+            " LAST_NAME VARCHAR(50), " +
             " EMAIL VARCHAR(50) UNIQUE, " +
             " PHONE_NUMBER VARCHAR(20), " +
             " STREET_ADDRESS VARCHAR(50), " +

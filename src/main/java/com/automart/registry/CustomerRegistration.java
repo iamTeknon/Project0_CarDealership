@@ -1,7 +1,7 @@
 package com.automart.registry;
 
 import com.automart.jdbc.crud.Dao;
-import com.automart.jdbc.crud.ImplementDao;
+import com.automart.jdbc.crud.ImplementCustomerDao;
 import com.automart.jdbc.entities.Customer;
 
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 // Regex code borrowed from https://owasp.org/www-community/OWASP_Validation_Regex_Repository
 public class CustomerRegistration {
     private static final Scanner scan = new Scanner(System.in);
-    private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementDao();
+    private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementCustomerDao();
     private String lastName;
     private String firstName;
     private String email;
@@ -30,11 +30,11 @@ public class CustomerRegistration {
     public void getCustomerInfo() throws SQLException {
 
         System.out.println("Howdy! Welcome to Automart! \nPlease enter your first name: ");
-        firstName = scan.nextLine();
+        this.firstName = scan.nextLine();
         System.out.println("Enter your last name: ");
-        lastName = scan.nextLine();
+        this.lastName = scan.nextLine();
         boolean phoneNumberFlag = false;
-        phoneNumber = "";
+        this.phoneNumber = "";
         while(!phoneNumberFlag){
             System.out.println("Enter your phone number, including area code: ");
             String phoneNumberCheck = scan.nextLine();
@@ -50,7 +50,7 @@ public class CustomerRegistration {
             }
         }
         boolean emailFlag = false;
-        email = "";
+        this.email = "";
         while(!emailFlag){
             System.out.println("Enter your email: ");
             String emailCheck = scan.nextLine();
@@ -67,11 +67,11 @@ public class CustomerRegistration {
             }
         }
         System.out.println("Enter your street address: ");
-        address = scan.nextLine();
+        this.address = scan.nextLine();
         System.out.println("Enter your city: ");
-        city = scan.nextLine();
+        this.city = scan.nextLine();
         boolean stateFlag = false;
-        state = "";
+        this.state = "";
         while(!stateFlag){
             System.out.println("Enter your state: ");
             String stateCheck = scan.nextLine();
@@ -92,7 +92,7 @@ public class CustomerRegistration {
             }
         }
         boolean zipFlag = false;
-        zip = "";
+        this.zip = "";
         while(!zipFlag){
             System.out.println("Enter your zip code: ");
             String zipCheck = scan.nextLine();
@@ -108,7 +108,7 @@ public class CustomerRegistration {
             }
         }
 
-        Customer customer = new Customer(lastName, firstName, email, phoneNumber, address, city, state, zip);
+        Customer customer = new Customer(id, lastName, firstName, email, phoneNumber, address, city, state, zip);
         addCustomer(customer);
     }
 

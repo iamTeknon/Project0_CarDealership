@@ -3,7 +3,7 @@ package com.automart.utilities;
 import com.automart.exceptions.NonExistentCustomerException;
 import com.automart.exceptions.NonExistentEntityException;
 import com.automart.jdbc.crud.Dao;
-import com.automart.jdbc.crud.ImplementDao;
+import com.automart.jdbc.crud.ImplementCustomerDao;
 import com.automart.jdbc.entities.Customer;
 import com.automart.ui.SignInPad;
 
@@ -16,12 +16,13 @@ public class Driver {
 
     private static final Scanner scan = new Scanner(System.in);
     private static final SignInPad sip = new SignInPad();
-    private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementDao();
+    private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementCustomerDao();
 
     public static void main(String[] args) throws SQLException, NonExistentEntityException {
 
 
         sip.signInOptions();
+
 
 //        EmployeeRegistration er = new EmployeeRegistration();
 //        er.getEmployeeInfo();

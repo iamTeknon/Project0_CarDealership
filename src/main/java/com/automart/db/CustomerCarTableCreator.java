@@ -13,7 +13,7 @@ public class CustomerCarTableCreator {
 
     // TODO: Need to make CUSTOMER_ID a Foreign key to customers table
     private static final String createTableSQL = "CREATE TABLE project0.customer_cars_test1 " +
-            "(EMAIL VARCHAR(50) PRIMARY KEY REFERENCES project0.customers_test1(email)," +
+            "(CUSTOMER_ID PRIMARY KEY REFERENCES project0.customers(customer_id)," +
             " YEAR INT, " +
             " MAKE TEXT, " +
             " MODEL TEXT, " +

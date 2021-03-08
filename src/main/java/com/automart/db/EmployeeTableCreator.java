@@ -12,10 +12,10 @@ public class EmployeeTableCreator {
     private final String password = "postgres";
 
     // TODO: Need to make email a composite key
-    private static final String createTableSQL = "CREATE TABLE project0.employees_test1 " +
+    private static final String createTableSQL = "CREATE TABLE project0.employees " +
             "(EMPLOYEE_ID SERIAL PRIMARY KEY," +
-            " LAST_NAME TEXT, " +
             " FIRST_NAME TEXT, " +
+            " LAST_NAME TEXT, " +
             " EMAIL VARCHAR(50) UNIQUE, " +
             " PHONE_NUMBER VARCHAR(20))";
 
