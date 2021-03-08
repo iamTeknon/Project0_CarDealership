@@ -5,9 +5,9 @@ import com.automart.exceptions.NonExistentEntityException;
 import com.automart.jdbc.crud.Dao;
 import com.automart.jdbc.crud.ImplementAutomartCarDao;
 import com.automart.jdbc.entities.AutomartCar;
+import com.automart.registry.CustomerCarRegistration;
 import com.automart.ui.SignInPad;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -35,7 +35,7 @@ public class Offers {
             String myOption = scan.nextLine();
             if(myOption.equalsIgnoreCase("o")){
                 System.out.println("What is your offer? ");
-                BigDecimal myOffer = scan.nextBigDecimal();
+                double myOffer = scan.nextDouble();
                 scan.nextLine();
                 System.out.println("Do you accept or reject this offer? 'a' to accept" +
                         " or 'r' to reject: ");
@@ -43,6 +43,8 @@ public class Offers {
                 if(offerOption.equalsIgnoreCase("a")){
                     System.out.println("CONGRATS! You are now going to be re-directed" +
                             " to finance to calculate your monthly payments!");
+                    CustomerCarRegistration ccr = new CustomerCarRegistration();
+                    ccr.getPurchasedCarInfo(carId);
                     offerFlag = false;
                     // TODO: Redirect to finance
                 }else if(offerOption.equalsIgnoreCase("r")){

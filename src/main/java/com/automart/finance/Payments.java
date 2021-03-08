@@ -2,6 +2,7 @@ package com.automart.finance;
 
 
 public class Payments {
+
     /*
         TODO: CREATE FIELDS
 

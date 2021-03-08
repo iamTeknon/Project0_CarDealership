@@ -65,8 +65,12 @@ public class SignInPad {
                     // TODO: need to finish custom array list for get all cars
 
                 }else if(viewOption.equalsIgnoreCase("o")){
+                    System.out.println("Please enter the Automart car id number for the vehicle you " +
+                            "would like to make an offer on: ");
+                    int myCarChoice = scan.nextInt();
+                    scan.nextLine();
                     Offers offer = new Offers();
-                    offer.makeOffer(1);
+                    offer.makeOffer(myCarChoice);
                     signInOptions();
                 }else if (viewOption.equalsIgnoreCase("m")) {
                     flag = false;
@@ -98,16 +102,16 @@ public class SignInPad {
             }
             while(employeeOptionsFlag){
                 System.out.println("Enter " +
-                    "'u' to update a customer account, " +
+                    "'a' to update a customer account, " +
                     "'r' to register a new employee, " +
                     "'e' to update employee info, " +
-                    "'a' to add a car, " +
-                    "'c' to update car , " +
+                    "'n' to add a car, " +
+                    "'u' to update car , " +
                     "'o' to view an offer, " +
                     "or 'x' to exit: ");
                 String employeeOption = scan.nextLine();
                 switch (employeeOption){
-                    case "u":
+                    case "a":
                         System.out.println("Please enter the customer id number: ");
                         int customerId = scan.nextInt();
                         scan.nextLine();
@@ -125,11 +129,11 @@ public class SignInPad {
                         UpdateEmployeeInfo uei = new UpdateEmployeeInfo();
                         uei.updateInfo(employeeId);
                         break;
-                    case "a":
-                        CarRegistration cr = new CarRegistration();
-                        cr.getCarInfo();
+                    case "n":
+                        AutomartCarRegistration acr = new AutomartCarRegistration();
+                        acr.getAutomartCarInfo();
                         break;
-                    case "c":
+                    case "u":
                         System.out.println("Please enter the Automart car id number: ");
                         int automartCarId = scan.nextInt();
                         scan.nextLine();

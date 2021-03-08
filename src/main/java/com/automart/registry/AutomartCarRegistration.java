@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class CarRegistration {
+public class AutomartCarRegistration {
     private static final Scanner scan = new Scanner(System.in);
     private static final Dao<AutomartCar, Integer> AUTOMART_CAR_DAO = new ImplementAutomartCarDao();
     private int id;
@@ -19,10 +19,10 @@ public class CarRegistration {
     private String color;
     private BigDecimal price;
 
-    public CarRegistration(){
+    public AutomartCarRegistration(){
     }
 
-    public void getCarInfo() throws SQLException {
+    public void getAutomartCarInfo() throws SQLException {
         System.out.println("What year model is the vehicle? ");
         year = scan.nextInt();
         scan.nextLine();
