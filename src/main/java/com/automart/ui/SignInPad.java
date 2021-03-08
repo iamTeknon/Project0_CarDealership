@@ -2,11 +2,13 @@ package com.automart.ui;
 
 import com.automart.exceptions.NonExistentCustomerException;
 import com.automart.exceptions.NonExistentEntityException;
+import com.automart.finance.Offers;
 import com.automart.jdbc.crud.Dao;
+import com.automart.jdbc.crud.ImplementCustomerDao;
 import com.automart.jdbc.crud.ImplementEmployeeDao;
+import com.automart.jdbc.entities.Customer;
 import com.automart.jdbc.entities.Employee;
-import com.automart.registry.CustomerRegistration;
-import com.automart.registry.UpdateCustomerInfo;
+import com.automart.registry.*;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -15,6 +17,7 @@ import java.util.Scanner;
 public class SignInPad {
     private static final Scanner scan = new Scanner(System.in);
     private static final Dao<Employee, Integer> EMPLOYEE_DAO = new ImplementEmployeeDao();
+    private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementCustomerDao();
     private String initialOption;
     private int customerId;
     private String viewOption;
@@ -37,22 +40,35 @@ public class SignInPad {
         }else if(initialOption.equalsIgnoreCase("l")){
             System.out.println("Please enter your customer ID: ");
             customerId = scan.nextInt();
+            scan.nextLine();
+            try{
+                Customer customer = getCustomer(customerId);
+            }catch(NonExistentEntityException ex){
+                ex.printStackTrace();
+                System.out.println("That customer is not in the database. Please make sure " +
+                        "you have the correct customer id #.");
+                signInOptions();
+            }
 
-            // TODO: Need to match entries to db info
-            // TODO: If no match then have them try 3 more times max
-
-            // As long as everything is good with log in
             boolean flag = true;
             while(flag) {
-                System.out.println("Enter 'v' to view cars for sale, 'm' to view cars you previously purchased," +
-                        " 'p' to view remaining payments on a car, or 'e' to exit: ");
+                System.out.println("Enter " +
+                    "'v' to view cars for sale, " +
+                    "'o' to make an offer on a vehicle, " +
+                    "'m' to view cars you previously purchased, " +
+                    "'p' to view remaining payments on a car, " +
+                    "or 'e' to exit: ");
                 viewOption = scan.nextLine();
 
                 if (viewOption.equalsIgnoreCase("v")) {
-                    flag = false;
-                    // TODO: Jump to car registry db
 
-                } else if (viewOption.equalsIgnoreCase("m")) {
+                    // TODO: need to finish custom array list for get all cars
+
+                }else if(viewOption.equalsIgnoreCase("o")){
+                    Offers offer = new Offers();
+                    offer.makeOffer(1);
+                    signInOptions();
+                }else if (viewOption.equalsIgnoreCase("m")) {
                     flag = false;
                     // TODO: Jump to customer account registry db
 
@@ -70,6 +86,7 @@ public class SignInPad {
         }else if(initialOption.equalsIgnoreCase("e")){
             System.out.println("Please enter your employee ID: ");
             employeeId = scan.nextInt();
+            scan.nextLine();
             boolean employeeOptionsFlag = true;
             try{
                 Employee employee = getEmployee(employeeId);
@@ -82,28 +99,47 @@ public class SignInPad {
             while(employeeOptionsFlag){
                 System.out.println("Enter " +
                     "'u' to update a customer account, " +
+                    "'r' to register a new employee, " +
+                    "'e' to update employee info, " +
                     "'a' to add a car, " +
-                    "'r' to remove a car, " +
+                    "'c' to update car , " +
                     "'o' to view an offer, " +
-                    "or 'e' to exit: ");
+                    "or 'x' to exit: ");
                 String employeeOption = scan.nextLine();
                 switch (employeeOption){
                     case "u":
                         System.out.println("Please enter the customer id number: ");
-                        int id = scan.nextInt();
+                        int customerId = scan.nextInt();
+                        scan.nextLine();
                         UpdateCustomerInfo uci = new UpdateCustomerInfo();
-                        uci.updateInfo(id);
-                        break;
-                    case "a":
-                        // TODO: add code to add car
+                        uci.updateInfo(customerId);
                         break;
                     case "r":
-                        // TODO: add code to remove car
+                        EmployeeRegistration er = new EmployeeRegistration();
+                        er.getEmployeeInfo();
+                        break;
+                    case "e":
+                        System.out.println("Please enter the employee id number: ");
+                        int employeeId = scan.nextInt();
+                        scan.nextLine();
+                        UpdateEmployeeInfo uei = new UpdateEmployeeInfo();
+                        uei.updateInfo(employeeId);
+                        break;
+                    case "a":
+                        CarRegistration cr = new CarRegistration();
+                        cr.getCarInfo();
+                        break;
+                    case "c":
+                        System.out.println("Please enter the Automart car id number: ");
+                        int automartCarId = scan.nextInt();
+                        scan.nextLine();
+                        UpdateAutomartCarInfo uaci = new UpdateAutomartCarInfo();
+                        uaci.updateCarInfo(automartCarId);
                         break;
                     case "o":
                         // TODO: add code to review offers and option to either accept or reject
                         break;
-                    case "e":
+                    case "x":
                         employeeOptionsFlag = false;
                         signInOptions();
                         break;
@@ -122,6 +158,11 @@ public class SignInPad {
     public static Employee getEmployee(int id) throws NonExistentEntityException {
         Optional<Employee> employee = EMPLOYEE_DAO.get(id);
         return employee.orElseThrow(NonExistentCustomerException::new);
+    }
+
+    public static Customer getCustomer(int id) throws NonExistentEntityException {
+        Optional<Customer> customer = CUSTOMER_DAO.get(id);
+        return customer.orElseThrow(NonExistentCustomerException::new);
     }
 
 }

@@ -36,7 +36,7 @@ public class UpdateCustomerInfo {
             ex.printStackTrace();
             System.out.println("That customer is not in the database. Please make sure " +
                     "you have the correct customer id #.");
-            updateFlag = false;
+            sip.signInOptions();
         }
         if(updateFlag){
             do{
@@ -51,7 +51,7 @@ public class UpdateCustomerInfo {
                         "'z' to update customers zip code, " +
                         "'d' to delete customer, " +
                         "or 'x' to exit: ");
-                String updateOption = scan.nextLine();
+                String updateOption = scan.next();
                 switch (updateOption){
                     case "f":
                         System.out.println("Please enter the new first name: ");

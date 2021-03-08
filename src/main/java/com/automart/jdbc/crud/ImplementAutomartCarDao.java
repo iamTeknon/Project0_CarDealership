@@ -2,7 +2,6 @@ package com.automart.jdbc.crud;
 
 import com.automart.jdbc.connect.AwsConnection;
 import com.automart.jdbc.entities.AutomartCar;
-
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,9 +17,9 @@ public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer>{
     }
 
     @Override
-    public Optional<Integer> save(AutomartCar automartCar) {
+    public Optional<Integer> save(AutomartCar car) {
         String message = "The car to be added should not be null";
-        AutomartCar nonNullAutomartCar = Objects.requireNonNull(automartCar, message);
+        AutomartCar nonNullAutomartCar = Objects.requireNonNull(car, message);
         String sql = "INSERT INTO "
                 + "project0.automart_cars(year, make, model, color, price) "
                 + "VALUES(?, ?, ?, ?, ?)";
@@ -36,7 +35,7 @@ public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer>{
                 statement.setString(2, nonNullAutomartCar.getMake());
                 statement.setString(3, nonNullAutomartCar.getModel());
                 statement.setString(4, nonNullAutomartCar.getColor());
-                statement.setBigDecimal(4, nonNullAutomartCar.getPrice());
+                statement.setBigDecimal(5, nonNullAutomartCar.getPrice());
 
                 int numberOfInsertedRows = statement.executeUpdate();
 
@@ -116,9 +115,9 @@ public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer>{
         return automartCars;
     }
 
-    public void update(AutomartCar automartCar) {
+    public void update(AutomartCar car) {
         String message = "The car to be updated should not be null";
-        AutomartCar nonNullAutomartCar = Objects.requireNonNull(automartCar, message);
+        AutomartCar nonNullAutomartCar = Objects.requireNonNull(car, message);
         String sql = "UPDATE project0.automart_cars "
                 + "SET "
                 + "year = ?, "
@@ -146,9 +145,9 @@ public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer>{
         });
     }
 
-    public void delete(AutomartCar automartCar) {
+    public void delete(AutomartCar car) {
         String message = "The car to be deleted should not be null";
-        AutomartCar nonNullAutomartCar = Objects.requireNonNull(automartCar, message);
+        AutomartCar nonNullAutomartCar = Objects.requireNonNull(car, message);
         String sql = "DELETE FROM project0.automart_cars WHERE automart_car_id = ?";
 
         connection.ifPresent(conn -> {

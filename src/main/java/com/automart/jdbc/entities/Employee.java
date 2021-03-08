@@ -1,7 +1,7 @@
 package com.automart.jdbc.entities;
 
 public class Employee {
-    private Integer id;
+    private int id;
     private String lastName;
     private String firstName;
     private String email;
@@ -38,7 +38,7 @@ public class Employee {
         this.id = id;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

@@ -2,7 +2,6 @@ package com.automart.jdbc.crud;
 
 import com.automart.jdbc.connect.AwsConnection;
 import com.automart.jdbc.entities.Employee;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -115,7 +114,7 @@ public class ImplementEmployeeDao implements Dao<Employee, Integer>{
         public void update(Employee employee) {
             String message = "The employee to be updated should not be null";
             Employee nonNullEmployee = Objects.requireNonNull(employee, message);
-            String sql = "UPDATE project0.customers "
+            String sql = "UPDATE project0.employees "
                     + "SET "
                     + "last_name = ?, "
                     + "first_name = ?, "

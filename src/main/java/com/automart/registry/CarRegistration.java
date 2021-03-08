@@ -22,8 +22,8 @@ public class CarRegistration {
     public CarRegistration(){
     }
 
-    public void getEmployeeInfo() throws SQLException {
-        System.out.println("What year model is the car? ");
+    public void getCarInfo() throws SQLException {
+        System.out.println("What year model is the vehicle? ");
         year = scan.nextInt();
         scan.nextLine();
 
@@ -33,14 +33,15 @@ public class CarRegistration {
         System.out.println("What is the model? ");
         model = scan.nextLine();
 
-        System.out.println("What color is the car? ");
+        System.out.println("What color is the vehicle? ");
         color = scan.nextLine();
 
-        System.out.println("What is the sale price of the car? ");
+        System.out.println("What is the sale price of the vehicle? ");
         price = scan.nextBigDecimal();
-    }
 
-    AutomartCar ac = new AutomartCar(id, year, make, model, color, price);
+        AutomartCar ac = new AutomartCar(id, year, make, model, color, price);
+        addAutomartCar(ac);
+    }
 
     // The following code was borrowed from Hiram Kamau and modified for this project
     // https://stackabuse.com/working-with-postgresql-in-java/

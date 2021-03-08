@@ -6,7 +6,6 @@ import com.automart.jdbc.crud.Dao;
 import com.automart.jdbc.crud.ImplementEmployeeDao;
 import com.automart.jdbc.entities.Employee;
 import com.automart.ui.SignInPad;
-
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -16,9 +15,6 @@ public class UpdateEmployeeInfo {
     private static final Dao<Employee, Integer> EMPLOYEE_DAO = new ImplementEmployeeDao();
     private static final SignInPad sip = new SignInPad();
     private static final Employee employee = new Employee();
-    private String newEmail;
-    private String newNumber;
-    private int customerId;
 
     public UpdateEmployeeInfo(){
     }
@@ -30,7 +26,6 @@ public class UpdateEmployeeInfo {
             ex.printStackTrace();
             System.out.println("That employee is not in the database. Please make " +
                     "sure you entered the correct employee id number.");
-            // TODO: add call to finances employee registration and update class
         }
         boolean updateFlag = false;
         while(!updateFlag){
@@ -39,7 +34,7 @@ public class UpdateEmployeeInfo {
                     "'l' to update employees last name, " +
                     "'p' to update employees phone number, " +
                     "'e' to update employees email, " +
-                    "'d' to delete employee, " +
+                    "'r' to remove an employee, " +
                     "or 'x' to exit: ");
             String updateOption = scan.nextLine();
             switch (updateOption){
@@ -61,7 +56,7 @@ public class UpdateEmployeeInfo {
                     break;
                 case "p":
                     System.out.println("Please enter the new phone number: ");
-                    newNumber = scan.nextLine();
+                    String newNumber = scan.nextLine();
                     employee.setPhone(newNumber);
                     employee.setId(employeeId);
                     updateEmployee(employee);
@@ -73,7 +68,7 @@ public class UpdateEmployeeInfo {
                     employee.setId(employeeId);
                     updateEmployee(employee);
                     break;
-                case "d":
+                case "r":
                     employee.setId(employeeId);
                     deleteEmployee(employee);
                     break;

@@ -10,6 +10,9 @@ public class AutomartCar {
     private String color;
     private BigDecimal price;
 
+    public AutomartCar(){
+    }
+
     public AutomartCar(int id, int year, String make, String model, String color, BigDecimal price){
         this.year = year;
         this.make = make;
