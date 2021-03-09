@@ -23,7 +23,7 @@ public class CustomerCarRegistration {
     private static final SignInPad sip = new SignInPad();
 //    private static final CustomerCar cr = new CustomerCar();
     private String email;
-    private int year;
+    private String year;
     private String make;
     private String model;
     private String color;
@@ -58,8 +58,7 @@ public class CustomerCarRegistration {
         }
 
         System.out.println("Enter the year of the purchased car: ");
-        year = scan.nextInt();
-        scan.nextLine();
+        year = scan.nextLine();
 
         System.out.println("Enter the make of the purchased car: ");
         make = scan.nextLine();

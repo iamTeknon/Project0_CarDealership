@@ -2,10 +2,9 @@ package com.automart.jdbc.crud;
 
 import com.automart.jdbc.connect.AwsConnection;
 import com.automart.jdbc.entities.AutomartCar;
+
 import java.math.BigDecimal;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -84,35 +83,32 @@ public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer>{
         });
     }
 
-    public Collection<AutomartCar> getAll() {
-        Collection<AutomartCar> automartCars = new ArrayList<>();
-        String sql = "SELECT * FROM project0.automart_cars";
-
-        connection.ifPresent(conn -> {
+    public Optional<AutomartCar> getEverything() {
+        return connection.flatMap(conn -> {
+            Optional<AutomartCar> automartCar = Optional.empty();
+            String sql = "SELECT * FROM project0.automart_cars";
             try (Statement statement = conn.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
 
                 while (resultSet.next()) {
-                    int id = resultSet.getInt("automart_car_id");
+                    int automart_car_id = resultSet.getInt("automart_car_id");
                     int year = resultSet.getInt("year");
                     String make = resultSet.getString("make");
                     String model = resultSet.getString("model");
                     String color = resultSet.getString("color");
                     BigDecimal price = resultSet.getBigDecimal("price");
 
-                    System.out.println(id + "  " + year + "  " + make + "  " + model
-                            + "  " +  color + "  " + price);
+                    System.out.println(automart_car_id + "  " +  year + ", " + make + "  " + model
+                            + "  " + color + "  " + price);
 
-                    AutomartCar automartCar = new AutomartCar(id, year, make, model, color, price);
-
-                    automartCars.add(automartCar);
+                    automartCar = Optional.of(
+                            new AutomartCar(automart_car_id, year, make, model, color, price));
                 }
-
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            return automartCar;
         });
-        return automartCars;
     }
 
     public void update(AutomartCar car) {

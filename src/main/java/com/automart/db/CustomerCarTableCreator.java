@@ -15,7 +15,7 @@ public class CustomerCarTableCreator {
     private static final String createTableSQL = "CREATE TABLE project0.customer_cars " +
             "(CAR_ID SERIAL PRIMARY KEY, " +
             " CUSTOMER_ID INT REFERENCES project0.customers(customer_id), " +
-            " YEAR INT, " +
+            " YEAR VARCHAR(4), " +
             " MAKE TEXT, " +
             " MODEL TEXT, " +
             " COLOR TEXT, " +

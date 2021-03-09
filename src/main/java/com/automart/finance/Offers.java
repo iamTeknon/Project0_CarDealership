@@ -37,6 +37,7 @@ public class Offers {
                 System.out.println("What is your offer? ");
                 double myOffer = scan.nextDouble();
                 scan.nextLine();
+                // TODO: Create db that stores customer id, name, offer, and vehicle info
                 System.out.println("Do you accept or reject this offer? 'a' to accept" +
                         " or 'r' to reject: ");
                 String offerOption = scan.nextLine();

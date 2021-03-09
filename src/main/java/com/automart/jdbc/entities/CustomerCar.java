@@ -3,14 +3,14 @@ package com.automart.jdbc.entities;
 public class CustomerCar {
     private int car_id;
     private int customer_id;
-    private int year;
+    private String year;
     private String make;
     private String model;
     private String color;
     private double monthlyPayment;
     private double balance;
 
-    public CustomerCar(int car_id, int customer_id, int year, String make, String model, String color,
+    public CustomerCar(int car_id, int customer_id, String year, String make, String model, String color,
                        double monthlyPayment, double balance) {
         this.car_id = car_id;
         this.customer_id = customer_id;
@@ -41,11 +41,11 @@ public class CustomerCar {
         this.car_id = car_id;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

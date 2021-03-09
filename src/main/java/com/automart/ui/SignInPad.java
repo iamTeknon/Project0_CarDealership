@@ -4,8 +4,10 @@ import com.automart.exceptions.NonExistentCustomerException;
 import com.automart.exceptions.NonExistentEntityException;
 import com.automart.finance.Offers;
 import com.automart.jdbc.crud.Dao;
+import com.automart.jdbc.crud.ImplementAutomartCarDao;
 import com.automart.jdbc.crud.ImplementCustomerDao;
 import com.automart.jdbc.crud.ImplementEmployeeDao;
+import com.automart.jdbc.entities.AutomartCar;
 import com.automart.jdbc.entities.Customer;
 import com.automart.jdbc.entities.Employee;
 import com.automart.registry.*;
@@ -18,6 +20,7 @@ public class SignInPad {
     private static final Scanner scan = new Scanner(System.in);
     private static final Dao<Employee, Integer> EMPLOYEE_DAO = new ImplementEmployeeDao();
     private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementCustomerDao();
+    private static final Dao<AutomartCar, Integer> AUTOMART_CAR_DAO = new ImplementAutomartCarDao();
     private String initialOption;
     private int customerId;
     private String viewOption;
@@ -61,8 +64,13 @@ public class SignInPad {
                 viewOption = scan.nextLine();
 
                 if (viewOption.equalsIgnoreCase("v")) {
-
-                    // TODO: need to finish custom array list for get all cars
+                    try{
+                        AutomartCar ac = getAutomartCar();
+                    }catch (NonExistentEntityException ex){
+                        ex.printStackTrace();
+                        System.out.println("That car is not in the database. Please make " +
+                                "sure you entered the correct Automart car id number.");
+                    }
 
                 }else if(viewOption.equalsIgnoreCase("o")){
                     System.out.println("Please enter the Automart car id number for the vehicle you " +
@@ -167,6 +175,13 @@ public class SignInPad {
     public static Customer getCustomer(int id) throws NonExistentEntityException {
         Optional<Customer> customer = CUSTOMER_DAO.get(id);
         return customer.orElseThrow(NonExistentCustomerException::new);
+    }
+
+    // The following code was borrowed from Hiram Kamau and modified for this project
+    // https://stackabuse.com/working-with-postgresql-in-java/
+    public static AutomartCar getAutomartCar() throws NonExistentEntityException {
+        Optional<AutomartCar> automartCar = AUTOMART_CAR_DAO.getEverything();
+        return automartCar.orElseThrow(NonExistentCustomerException::new);
     }
 
 }

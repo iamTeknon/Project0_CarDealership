@@ -2,9 +2,8 @@ package com.automart.jdbc.crud;
 
 import com.automart.jdbc.connect.AwsConnection;
 import com.automart.jdbc.entities.Employee;
+
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -81,35 +80,32 @@ public class ImplementEmployeeDao implements Dao<Employee, Integer>{
             });
         }
 
-        public Collection<Employee> getAll() {
-            Collection<Employee> employees = new ArrayList<>();
+    public Optional<Employee> getEverything() {
+        return connection.flatMap(conn -> {
+            Optional<Employee> employee = Optional.empty();
             String sql = "SELECT * FROM project0.employees";
+            try (Statement statement = conn.createStatement();
+                 ResultSet resultSet = statement.executeQuery(sql)) {
 
-            connection.ifPresent(conn -> {
-                try (Statement statement = conn.createStatement();
-                     ResultSet resultSet = statement.executeQuery(sql)) {
+                while (resultSet.next()) {
+                    int employee_id = resultSet.getInt("employee_id");
+                    String lastName = resultSet.getString("last_name");
+                    String firstName = resultSet.getString("first_name");
+                    String email = resultSet.getString("email");
+                    String phone = resultSet.getString("phone_number");
 
-                    while (resultSet.next()) {
-                        int id = resultSet.getInt("employee_id");
-                        String firstName = resultSet.getString("first_name");
-                        String lastName = resultSet.getString("last_name");
-                        String email = resultSet.getString("email");
-                        String phone = resultSet.getString("phone_number");
+                    System.out.println(employee_id + "  " +  lastName + ", " + firstName + "  " + email
+                            + "  " + phone);
 
-                        System.out.println(id + ", " + lastName + ", " + firstName + ", " + email
-                                + ", " +  phone);
-
-                        Employee employee = new Employee(id, lastName, firstName, email, phone);
-
-                        employees.add(employee);
-                    }
-
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+                    employee = Optional.of(
+                            new Employee(employee_id, lastName, firstName, email, phone));
                 }
-            });
-            return employees;
-        }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            return employee;
+        });
+    }
 
         public void update(Employee employee) {
             String message = "The employee to be updated should not be null";

@@ -4,8 +4,6 @@ import com.automart.jdbc.connect.AwsConnection;
 import com.automart.jdbc.entities.Customer;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -93,38 +91,35 @@ public class ImplementCustomerDao implements Dao<Customer, Integer>{
         });
     }
 
-    public Collection<Customer> getAll() {
-        Collection<Customer> customers = new ArrayList<>();
-        String sql = "SELECT * FROM project0.customers";
-
-        connection.ifPresent(conn -> {
+    public Optional<Customer> getEverything() {
+        return connection.flatMap(conn -> {
+            Optional<Customer> customer = Optional.empty();
+            String sql = "SELECT * FROM project0.customers";
             try (Statement statement = conn.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
 
                 while (resultSet.next()) {
-                    int id = resultSet.getInt("customer_id");
-                    String firstName = resultSet.getString("first_name");
+                    int customer_id = resultSet.getInt("customer_id");
                     String lastName = resultSet.getString("last_name");
+                    String firstName = resultSet.getString("first_name");
                     String email = resultSet.getString("email");
                     String phone = resultSet.getString("phone_number");
                     String address = resultSet.getString("street_address");
                     String city = resultSet.getString("city");
                     String state = resultSet.getString("state");
                     String zip  = resultSet.getString("zip_code");
-                    System.out.println(id + ", " + lastName + ", " + firstName + ", " + email
-                            + ", " +  phone + ", " +  address + ", " + city + ", " + state + ", " + zip);
+                    System.out.println(customer_id + "  " +  lastName + ", " + firstName + "  " + email
+                            + "  " + phone + "  " + address + "  " + city + "  " + state + "  " + zip);
 
-                    Customer customer = new Customer(id, lastName, firstName, email, phone,
-                            address, city, state, zip);
-
-                    customers.add(customer);
+                    customer = Optional.of(
+                            new Customer(customer_id, lastName, firstName, email, phone,
+                                    address, city, state, zip));
                 }
-
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            return customer;
         });
-        return customers;
     }
 
     public void update(Customer customer) {
