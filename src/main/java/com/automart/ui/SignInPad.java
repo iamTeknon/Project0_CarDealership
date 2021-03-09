@@ -7,10 +7,7 @@ import com.automart.jdbc.crud.UpdateCustomerInfo;
 import com.automart.jdbc.crud.UpdateEmployeeInfo;
 import com.automart.jdbc.crud.UpdateOffers;
 import com.automart.jdbc.dao.*;
-import com.automart.jdbc.entities.AutomartCar;
-import com.automart.jdbc.entities.Customer;
-import com.automart.jdbc.entities.Employee;
-import com.automart.jdbc.entities.Offers;
+import com.automart.jdbc.entities.*;
 import com.automart.registry.AutomartCarRegistration;
 import com.automart.registry.CustomerRegistration;
 import com.automart.registry.EmployeeRegistration;
@@ -26,17 +23,18 @@ public class SignInPad {
     private static final Dao<Employee, Integer> EMPLOYEE_DAO = new ImplementEmployeeDao();
     private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementCustomerDao();
     private static final Dao<AutomartCar, Integer> AUTOMART_CAR_DAO = new ImplementAutomartCarDao();
-    private static final Dao<Offers, Integer> OFFERS_CAR_DAO = new ImplementOffersDao();
+    private static final Dao<Offers, Integer> OFFERS_DAO = new ImplementOffersDao();
+    private static final Dao<CustomerCar, Integer> CUSTOMER_CARS_DAO = new ImplementCustomerCarDao();
     private int customerId;
 
     public SignInPad(){
     }
 
     public void signInOptions() throws SQLException, NonExistentEntityException {
-        System.out.println("Howdy! Please enter " +
-                "'r' to register for a customer account, " +
-                "'l' for customer log in, or " +
-                "'e' for employee log in: ");
+        System.out.println("\n\nHowdy! Please enter: \n" +
+                "'r' to register for a customer account, \n" +
+                "'l' for customer log in, or \n" +
+                "'e' for employee log in: \n");
 
         String initialOption = scan.nextLine();
 
@@ -62,12 +60,12 @@ public class SignInPad {
 
             boolean flag = true;
             while(flag) {
-                System.out.println("Thank you for shopping at Automart! Please enter " +
-                    "'v' to view cars for sale, " +
-                    "'o' to make an offer on a vehicle, " +
-                    "'m' to view cars you previously purchased, " +
-                    "'p' to view remaining payments on a car, " +
-                    "or 'x' to exit: ");
+                System.out.println("\n\nThank you for shopping at Automart! Please enter " +
+                    "'v' to view cars for sale, \n" +
+                    "'o' to make an offer on a vehicle, \n" +
+                    "'m' to view cars you previously purchased, \n" +
+                    "'p' to view remaining payments on a car, \n" +
+                    "'x' to exit: ");
                 String viewOption = scan.nextLine();
 
                 if (viewOption.equalsIgnoreCase("v")) {
@@ -75,6 +73,8 @@ public class SignInPad {
                         AutomartCar ac = getAutomartCar();
                     }catch (NonExistentEntityException ex){
                         ex.printStackTrace();
+                        System.out.println("I'm sorry, but something has gone wrong. You will" +
+                                " now be redirected back to the sign in options.");
                         signInOptions();
                     }
                 }
@@ -120,15 +120,15 @@ public class SignInPad {
                 employeeOptionsFlag = false;
             }
             while(employeeOptionsFlag){
-                System.out.println("Enter " +
-                    "'a' to update a customer account, " +
-                    "'r' to register a new employee, " +
-                    "'e' to update employee info, " +
-                    "'n' to add a car, " +
-                    "'u' to update car , " +
-                    "'o' to view offers, " +
-                    "'p' to view all payments, " +
-                    "or 'x' to exit: ");
+                System.out.println("\n\nEnter: \n" +
+                    "'a' to update a customer account, \n" +
+                    "'r' to register a new employee, \n" +
+                    "'e' to update employee info, \n" +
+                    "'n' to add a car, \n" +
+                    "'u' to update car , \n" +
+                    "'o' to view offers, \n" +
+                    "'p' to view all payments, \n" +
+                    "'x' to exit: ");
                 String employeeOption = scan.nextLine();
                 switch (employeeOption){
                     case "a":
@@ -185,7 +185,15 @@ public class SignInPad {
                         uo.updateOffers(offerSelection, customer, vehicle, offer);
                         break;
                     case "p":
-                        // TODO: create method to view all payments
+                        try{
+                            CustomerCar cc = getCustomerCars();
+                        }catch (NonExistentEntityException ex){
+                            ex.printStackTrace();
+                            System.out.println("I'm sorry, but something has gone wrong. You will" +
+                                    " now be redirected back to the sign in options.");
+                            signInOptions();
+                        }
+                        break;
                     case "x":
                         employeeOptionsFlag = false;
                         signInOptions();
@@ -217,8 +225,13 @@ public class SignInPad {
     }
 
     public static Offers getOffers() throws NonExistentEntityException {
-        Optional<Offers> offer = OFFERS_CAR_DAO.getEverything();
+        Optional<Offers> offer = OFFERS_DAO.getEverything();
         return offer.orElseThrow(NonExistentCustomerException::new);
+    }
+
+    public static CustomerCar getCustomerCars() throws NonExistentEntityException {
+        Optional<CustomerCar> cars = CUSTOMER_CARS_DAO.getEverything();
+        return cars.orElseThrow(NonExistentCustomerException::new);
     }
 
 }

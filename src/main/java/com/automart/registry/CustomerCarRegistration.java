@@ -33,26 +33,20 @@ public class CustomerCarRegistration {
     public CustomerCarRegistration(){
     }
 
-    public void getPurchasedCarInfo(int carId) throws SQLException, NonExistentEntityException {
-        System.out.println("Please enter the customers ID: ");
-        int customerId = scan.nextInt();
-        scan.nextLine();
-//        System.out.println("The current customer id in customer class is: " + cr.getCustomer_id());
-//        cr.setCustomer_id(customerId);
-//        System.out.println("The current customer id in customer class is: " + cr.getCustomer_id());
+    public void getPurchasedCarInfo(int carId, int customerId) throws SQLException, NonExistentEntityException {
+
         try{
             Customer customer = getCustomer(customerId);
         }catch(NonExistentEntityException ex){
             ex.printStackTrace();
-            System.out.println("That customer is not in the database. Please make sure " +
-                    "you have the correct customer id #.");
-            sip.signInOptions();
+            System.out.println("I'm sorry, but that customer is not in the database. Please make sure " +
+                    "you have the correct customer id number.");
         }
         try{
             AutomartCar car = getAutomartCar(carId);
         }catch(NonExistentEntityException ex){
             ex.printStackTrace();
-            System.out.println("That vehicle is not in the database. Please make sure " +
+            System.out.println("I'm sorry, but that vehicle is not in the database. Please make sure " +
                     "you have the correct Automart car id number.");
             sip.signInOptions();
         }
@@ -74,8 +68,6 @@ public class CustomerCarRegistration {
         scan.nextLine();
 
         monthlyPayment = balanceOffer / 72;
-
-//        cr.setCustomer_id(customerId);
 
         CustomerCar cc = new CustomerCar(car_id, customerId, year, make, model, color, monthlyPayment, balanceOffer);
         addCustomerCar(cc);

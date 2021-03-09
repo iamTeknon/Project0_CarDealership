@@ -5,6 +5,7 @@ import com.automart.exceptions.NonExistentEntityException;
 import com.automart.jdbc.dao.Dao;
 import com.automart.jdbc.dao.ImplementOffersDao;
 import com.automart.jdbc.entities.Offers;
+import com.automart.registry.CustomerCarRegistration;
 import com.automart.ui.SignInPad;
 
 import java.math.BigDecimal;
@@ -31,6 +32,8 @@ public class UpdateOffers {
             o.setVehicleId(carId);
             o.setOfferId(offerId);
             updateOffers(o);
+            CustomerCarRegistration ccr = new CustomerCarRegistration();
+            ccr.getPurchasedCarInfo(carId, customerId);
             System.out.println("You will now be redirected to the sign in options menu.");
             sip.signInOptions();
         }
