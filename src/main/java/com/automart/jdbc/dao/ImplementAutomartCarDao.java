@@ -49,6 +49,7 @@ public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer> {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            System.out.println("The Automart vehicle has been added to the database.");
             return generatedId;
         });
     }
@@ -138,6 +139,7 @@ public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer> {
                 ex.printStackTrace();
             }
         });
+        System.out.println("The Automart vehicle has been updated in the database.");
     }
 
     public void delete(AutomartCar car) {
@@ -156,6 +158,7 @@ public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer> {
                 ex.printStackTrace();
             }
         });
+        System.out.println("The Automart vehicle has been deleted from the database.");
     }
 }
 

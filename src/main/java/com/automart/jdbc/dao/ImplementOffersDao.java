@@ -48,6 +48,7 @@ public class ImplementOffersDao implements Dao<Offers, Integer> {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            System.out.println("The offer has been added to the database.");
             return generatedId;
         });
     }
@@ -117,7 +118,7 @@ public class ImplementOffersDao implements Dao<Offers, Integer> {
                 + "customer_id = ?, "
                 + "automart_car_id = ?, "
                 + "offer = ?, "
-                + "verdict = ?"
+                + "verdict = ? "
                 + "WHERE "
                 + "offer_id = ?";
 
@@ -126,8 +127,9 @@ public class ImplementOffersDao implements Dao<Offers, Integer> {
                 statement.setInt(1,nonNullOffers.getCustomerId());
                 statement.setInt(2, nonNullOffers.getVehicleId());
                 statement.setBigDecimal(3, nonNullOffers.getOffer());
-                statement.setInt(4, nonNullOffers.getOfferId());
-                statement.setString(5, nonNullOffers.getVerdict());
+                statement.setString(4, nonNullOffers.getVerdict());
+                statement.setInt(5, nonNullOffers.getOfferId());
+
 
                 int numberOfUpdatedRows = statement.executeUpdate();
 
@@ -135,6 +137,7 @@ public class ImplementOffersDao implements Dao<Offers, Integer> {
                 ex.printStackTrace();
             }
         });
+        System.out.println("The offer has been updated in the database.");
     }
 
     public void delete(Offers offer) {
@@ -153,6 +156,7 @@ public class ImplementOffersDao implements Dao<Offers, Integer> {
                 ex.printStackTrace();
             }
         });
+        System.out.println("The offer has been removed from the database.");
     }
 
 }

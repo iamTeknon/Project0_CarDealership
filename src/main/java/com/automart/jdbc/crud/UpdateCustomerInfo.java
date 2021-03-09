@@ -38,112 +38,53 @@ public class UpdateCustomerInfo {
                     "to the sign in options menu.");
             sip.signInOptions();
         }
-        boolean updateFlag = true;
-        if(updateFlag){
-            do{
-                System.out.println("Please enter " +
-                        "'f' to update customers first name, " +
-                        "'l' to update customers last name, " +
-                        "'p' to update customers phone number, " +
-                        "'e' to update customers email, " +
-                        "'a' to update customers street address, " +
-                        "'c' to update customers city, " +
-                        "'s' to update customers state, " +
-                        "'z' to update customers zip code, " +
-                        "'d' to delete customer, " +
-                        "or 'x' to exit: ");
-                String updateOption = scan.next();
-                switch (updateOption){
-                    case "f":
-                        System.out.println("Please enter the new first name: ");
-                        String newFirstName = scan.nextLine();
-                        customer.setLastName(customer.getLastName());
-                        customer.setFirstName(newFirstName);
-                        customer.setId(customerId);
-                        updateCustomer(customer);
-                        System.out.println("The customers first name has been updated in our database.");
-                        System.out.println("You will now be redirected to the sign in options menu.");
-                        break;
-                    case "l":
-                        System.out.println("Please enter the new last name: ");
-                        String newLastName = scan.nextLine();
-                        customer.setFirstName(customer.getFirstName());
-                        customer.setLastName(newLastName);
-                        customer.setId(customerId);
-                        updateCustomer(customer);
-                        System.out.println("The customers last name has been updated in our database.");
-                        System.out.println("You will now be redirected to the sign in options menu.");
-                        break;
 
-                    case "p":
-                        System.out.println("Please enter the new phone number: ");
-                        newNumber = scan.nextLine();
-                        customer.setPhone(newNumber);
-                        customer.setId(customerId);
-                        updateCustomer(customer);
-                        System.out.println("The customers phone number has been updated in our database.");
-                        System.out.println("You will now be redirected to the sign in options menu.");
-                        break;
-                    case "e":
-                        System.out.println("Please enter the new email: ");
-                        String newEmail = scan.nextLine();
-                        customer.setEmail(newEmail);
-                        customer.setId(customerId);
-                        updateCustomer(customer);
-                        System.out.println("The customers email has been updated in our database.");
-                        System.out.println("You will now be redirected to the sign in options menu.");
-                        break;
-                    case "a":
-                        System.out.println("Please enter the new street address: ");
-                        String newAddress = scan.nextLine();
-                        customer.setAddress(newAddress);
-                        customer.setId(customerId);
-                        updateCustomer(customer);
-                        System.out.println("The customers street address has been updated in our database.");
-                        System.out.println("You will now be redirected to the sign in options menu.");
-                        break;
-                    case "c":
-                        System.out.println("Please enter the new city: ");
-                        String newCity = scan.nextLine();
-                        customer.setCity(newCity);
-                        customer.setId(customerId);
-                        updateCustomer(customer);
-                        System.out.println("The customers city has been updated in our database.");
-                        System.out.println("You will now be redirected to the sign in options menu.");
-                        break;
-                    case "s":
-                        System.out.println("Please enter the new state: ");
-                        String newState = scan.nextLine();
-                        customer.setState(newState);
-                        customer.setId(customerId);
-                        updateCustomer(customer);
-                        System.out.println("The customers state has been updated in our database.");
-                        System.out.println("You will now be redirected to the sign in options menu.");
-                        break;
-                    case "z":
-                        System.out.println("Please enter the new zip code: ");
-                        String newZip = scan.nextLine();
-                        customer.setZip(newZip);
-                        customer.setId(customerId);
-                        updateCustomer(customer);
-                        System.out.println("The customers zip code has been updated in our database.");
-                        System.out.println("You will now be redirected to the sign in options menu.");
-                        break;
-                    case "d":
-                        customer.setId(customerId);
-                        deleteCustomer(customer);
-                        System.out.println("The customer has been deleted from our database.");
-                        System.out.println("You will now be redirected to the sign in options menu.");
-                        break;
-                    case "x":
-                        updateFlag = false;
-                        break;
-                    default:
-                        break;
-                }
-            }while(updateFlag);
+        System.out.println("Please enter " +
+                "'u' to update customers information in the database, " +
+                "'r' to remove the customer from the database," +
+                " or 'x' to exit: ");
+        String updateOption = scan.nextLine();
+        switch (updateOption){
+            case "u":
+                System.out.println("Please enter the customers first name: ");
+                String newFirstName = scan.nextLine();
+                customer.setFirstName(newFirstName);
+                System.out.println("Please enter the customers last name: ");
+                String newLastName = scan.nextLine();
+                customer.setLastName(newLastName);
+                System.out.println("Please enter the customers phone number: ");
+                newNumber = scan.nextLine();
+                customer.setPhone(newNumber);
+                System.out.println("Please enter the customers email: ");
+                String newEmail = scan.nextLine();
+                customer.setEmail(newEmail);
+                System.out.println("Please enter the customers street address: ");
+                String newAddress = scan.nextLine();
+                customer.setAddress(newAddress);
+                System.out.println("Please enter the customers city: ");
+                String newCity = scan.nextLine();
+                customer.setCity(newCity);
+                System.out.println("Please enter the customers state: ");
+                String newState = scan.nextLine();
+                customer.setState(newState);
+                System.out.println("Please enter the customers zip code: ");
+                String newZip = scan.nextLine();
+                customer.setZip(newZip);
+                customer.setId(customerId);
+                updateCustomer(customer);
+                System.out.println("You will now be redirected to the sign in options menu.");
+                break;
+            case "r":
+                customer.setId(customerId);
+                deleteCustomer(customer);
+                System.out.println("You will now be redirected to the sign in options menu.");
+                break;
+            case "x":
+                System.out.println("You will now be redirected to the sign in options menu.");
+                break;
+            default:
+                break;
         }
-
         sip.signInOptions();
     }
 

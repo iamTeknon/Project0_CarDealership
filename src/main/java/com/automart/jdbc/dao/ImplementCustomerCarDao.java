@@ -51,6 +51,7 @@ public class ImplementCustomerCarDao implements Dao<CustomerCar, Integer> {
             } catch (SQLException ex) {
                     ex.printStackTrace();
             }
+                System.out.println("The customers car has been added to the database.");
             return generatedId;
             });
     }
@@ -150,6 +151,7 @@ public class ImplementCustomerCarDao implements Dao<CustomerCar, Integer> {
                 ex.printStackTrace();
             }
             });
+        System.out.println("The customers car information has been updated in the database.");
             }
 
     public void delete(CustomerCar car) {
@@ -168,6 +170,7 @@ public class ImplementCustomerCarDao implements Dao<CustomerCar, Integer> {
             ex.printStackTrace();
             }
             });
+        System.out.println("The customers car has been removed from the database.");
     }
 
 }

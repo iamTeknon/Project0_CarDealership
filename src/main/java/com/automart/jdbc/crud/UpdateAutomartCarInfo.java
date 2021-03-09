@@ -29,65 +29,44 @@ public class UpdateAutomartCarInfo {
             System.out.println("That car is not in the database. Please make " +
                     "sure you entered the correct Automart car id number.");
         }
-        boolean updateFlag = false;
-        while (!updateFlag) {
-            System.out.println("Please enter " +
-                "'y' to update year of vehicle, " +
-                "'m' to update vehicle make, " +
-                "'o' to update vehicle model, " +
-                "'c' to update vehicle color, " +
-                "'p' to update vehicle price, " +
-                "'d' to delete vehicle, " +
-                "or 'x' to exit: ");
-            String updateOption = scan.nextLine();
-            switch (updateOption) {
-                case "y":
-                    System.out.println("Enter the year of the vehicle: ");
-                    int updatedYear = scan.nextInt();
-                    scan.nextLine();
-                    ac.setYear(updatedYear);
-                    ac.setId(carId);
-                    updateAutomartCar(ac);
-                    break;
-                case "m":
-                    System.out.println("Enter the make of the vehicle: ");
-                    String updatedMake = scan.nextLine();
-                    ac.setMake(updatedMake);
-                    ac.setId(carId);
-                    updateAutomartCar(ac);
-                    break;
-                case "o":
-                    System.out.println("Enter the model of the vehicle: ");
-                    String updateModel = scan.nextLine();
-                    ac.setModel(updateModel);
-                    ac.setId(carId);
-                    updateAutomartCar(ac);
-                    break;
-                case "c":
-                    System.out.println("Enter the color of the vehicle: ");
-                    String updateColor = scan.nextLine();
-                    ac.setColor(updateColor);
-                    ac.setId(carId);
-                    updateAutomartCar(ac);
-                    break;
-                case "p":
-                    System.out.println("Enter the new asking price: ");
-                    BigDecimal newPrice = scan.nextBigDecimal();
-                    scan.nextLine();
-                    ac.setPrice(newPrice);
-                    ac.setId(carId);
-                    updateAutomartCar(ac);
-                    break;
-                case "d":
-                    ac.setId(carId);
-                    deleteAutomartCar(ac);
-                    break;
-                case "x":
-                    updateFlag = true;
-                    break;
-                default:
-                    break;
-            }
+        System.out.println("Please enter " +
+            "'u' to update the vehicle information in the database, " +
+            "'r' to remove the vehicle from the database," +
+            " or 'x' to exit: ");
+        String updateOption = scan.nextLine();
+        switch (updateOption) {
+            case "u":
+                System.out.println("Enter the year of the vehicle: ");
+                int updatedYear = scan.nextInt();
+                scan.nextLine();
+                ac.setYear(updatedYear);
+                System.out.println("Enter the make of the vehicle: ");
+                String updatedMake = scan.nextLine();
+                ac.setMake(updatedMake);
+                System.out.println("Enter the model of the vehicle: ");
+                String updateModel = scan.nextLine();
+                ac.setModel(updateModel);
+                System.out.println("Enter the color of the vehicle: ");
+                String updateColor = scan.nextLine();
+                ac.setColor(updateColor);
+                System.out.println("Enter the new asking price: ");
+                BigDecimal newPrice = scan.nextBigDecimal();
+                scan.nextLine();
+                ac.setPrice(newPrice);
+                ac.setId(carId);
+                updateAutomartCar(ac);
+                System.out.println("You will now be redirected to the sign in options menu.");
+                break;
+          case "r":
+                ac.setId(carId);
+                deleteAutomartCar(ac);
+               System.out.println("You will now be redirected to the sign in options menu.");
+                break;
+            case "x":
+                System.out.println("You will now be redirected to the sign in options menu.");
+                break;
+            default:
+                break;
         }
         sip.signInOptions();
     }

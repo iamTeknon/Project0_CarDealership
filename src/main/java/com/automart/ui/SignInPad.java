@@ -16,6 +16,7 @@ import com.automart.registry.CustomerRegistration;
 import com.automart.registry.EmployeeRegistration;
 import com.automart.registry.OfferRegistration;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -126,6 +127,7 @@ public class SignInPad {
                     "'n' to add a car, " +
                     "'u' to update car , " +
                     "'o' to view offers, " +
+                    "'p' to view all payments, " +
                     "or 'x' to exit: ");
                 String employeeOption = scan.nextLine();
                 switch (employeeOption){
@@ -141,7 +143,7 @@ public class SignInPad {
                         er.getEmployeeInfo();
                         break;
                     case "e":
-                        System.out.println("Please enter the employee id number: ");
+                        System.out.println("Please enter the employees id number: ");
                         employeeId = scan.nextInt();
                         scan.nextLine();
                         UpdateEmployeeInfo uei = new UpdateEmployeeInfo();
@@ -163,18 +165,33 @@ public class SignInPad {
                             Offers o = getOffers();
                         }catch (NonExistentEntityException ex){
                             ex.printStackTrace();
-                            System.out.println("Something has gone wrong. You will be redirected " +
-                                    "to the sign in options menu. Sorry for any inconvenience.");
+                            System.out.println("Something has gone wrong. You will now be redirected " +
+                                    "to the sign in options menu.");
                             signInOptions();
                         }
+                        System.out.println("Which offer would you like to accept or reject? ");
+                        int offerSelection = scan.nextInt();
+                        scan.nextLine();
+                        System.out.println("What is the customer id number for the offer? ");
+                        int customer = scan.nextInt();
+                        scan.nextLine();
+                        System.out.println("What is the vehicle id number for the offer? ");
+                        int vehicle = scan.nextInt();
+                        scan.nextLine();
+                        System.out.println("What is the offer price for the vehicle? ");
+                        BigDecimal offer = scan.nextBigDecimal();
+                        scan.nextLine();
                         UpdateOffers uo = new UpdateOffers();
-                        uo.updateOffers();
+                        uo.updateOffers(offerSelection, customer, vehicle, offer);
                         break;
+                    case "p":
+                        // TODO: create method to view all payments
                     case "x":
                         employeeOptionsFlag = false;
                         signInOptions();
                         break;
                     default:
+                        System.out.println("Please make sure you entered your choice correctly");
                         break;
                 }
             }

@@ -27,67 +27,40 @@ public class UpdateEmployeeInfo {
             System.out.println("I'm sorry, but that employee is not in our database. Please make " +
                     "sure you entered the correct employee id number.");
         }
-        boolean updateFlag = false;
-        while(!updateFlag){
-            System.out.println("Please enter " +
-                    "'f' to update employees first name, " +
-                    "'l' to update employees last name, " +
-                    "'p' to update employees phone number, " +
-                    "'e' to update employees email, " +
-                    "'r' to remove an employee, " +
-                    "or 'x' to exit: ");
-            String updateOption = scan.nextLine();
-            switch (updateOption){
-                case "f":
-                    System.out.println("Please enter the new first name: ");
-                    String newFirstName = scan.nextLine();
-                    employee.setLastName(employee.getLastName());
-                    employee.setFirstName(newFirstName);
-                    employee.setId(employeeId);
-                    updateEmployee(employee);
-                    System.out.println("The employees first name has been updated in our database.");
-                    System.out.println("You will now be redirected to the sign in options menu.");
-                    break;
-                case "l":
-                    System.out.println("Please enter the new last name: ");
-                    String newLastName = scan.nextLine();
-                    employee.setFirstName(employee.getFirstName());
-                    employee.setLastName(newLastName);
-                    employee.setId(employeeId);
-                    updateEmployee(employee);
-                    System.out.println("The employees last name has been updated in our database.");
-                    System.out.println("You will now be redirected to the sign in options menu.");
-                    break;
-                case "p":
-                    System.out.println("Please enter the new phone number: ");
-                    String newNumber = scan.nextLine();
-                    employee.setPhone(newNumber);
-                    employee.setId(employeeId);
-                    updateEmployee(employee);
-                    System.out.println("The employees phone number has been updated in our database.");
-                    System.out.println("You will now be redirected to the sign in options menu.");
-                    break;
-                case "e":
-                    System.out.println("Please enter the new email: ");
-                    String newEmail = scan.nextLine();
-                    employee.setEmail(newEmail);
-                    employee.setId(employeeId);
-                    updateEmployee(employee);
-                    System.out.println("The employees email has been updated in our database.");
-                    System.out.println("You will now be redirected to the sign in options menu.");
-                    break;
-                case "r":
-                    employee.setId(employeeId);
-                    deleteEmployee(employee);
-                    System.out.println("The employee has been deleted from our database.");
-                    System.out.println("You will now be redirected to the sign in options menu.");
-                    break;
-                case "x":
-                    updateFlag = true;
-                    break;
-                default:
-                    break;
-            }
+        System.out.println("Please enter " +
+                "'u' to update employees information in the database, " +
+                "'r' to remove an employee from the database, " +
+                "or 'x' to exit: ");
+        String updateOption = scan.nextLine();
+        switch (updateOption){
+            case "u":
+                System.out.println("Please enter the employees first name: ");
+                String newFirstName = scan.nextLine();
+                employee.setFirstName(newFirstName);
+                System.out.println("Please enter the employees last name: ");
+                String newLastName = scan.nextLine();
+                employee.setFirstName(employee.getFirstName());
+                employee.setLastName(newLastName);
+                System.out.println("Please enter the employess phone number: ");
+                String newNumber = scan.nextLine();
+                employee.setPhone(newNumber);
+                System.out.println("Please enter the employees email: ");
+                String newEmail = scan.nextLine();
+                employee.setEmail(newEmail);
+                employee.setId(employeeId);
+                updateEmployee(employee);
+                System.out.println("You will now be redirected to the sign in options menu.");
+                break;
+            case "r":
+                employee.setId(employeeId);
+                deleteEmployee(employee);
+                System.out.println("You will now be redirected to the sign in options menu.");
+                break;
+            case "x":
+                System.out.println("You will now be redirected to the sign in options menu.");
+                break;
+            default:
+                break;
         }
         sip.signInOptions();
     }

@@ -51,6 +51,7 @@ public class ImplementCustomerDao implements Dao<Customer, Integer> {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            System.out.println("The customer has been added to the database.");
             return generatedId;
         });
     }
@@ -153,6 +154,7 @@ public class ImplementCustomerDao implements Dao<Customer, Integer> {
                 ex.printStackTrace();
             }
         });
+        System.out.println("The customers information has been updated in the database.");
     }
 
     public void delete(Customer customer) {
@@ -171,5 +173,6 @@ public class ImplementCustomerDao implements Dao<Customer, Integer> {
                 ex.printStackTrace();
             }
         });
+        System.out.println("The customer has been removed from the database.");
     }
 }

@@ -48,6 +48,7 @@ public class ImplementEmployeeDao implements Dao<Employee, Integer> {
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
+                System.out.println("The employee has been added to the database.");
                 return generatedId;
             });
         }
@@ -134,6 +135,7 @@ public class ImplementEmployeeDao implements Dao<Employee, Integer> {
                     ex.printStackTrace();
                 }
             });
+            System.out.println("The employees information has been updated in the database.");
         }
 
         public void delete(Employee employee) {
@@ -152,5 +154,6 @@ public class ImplementEmployeeDao implements Dao<Employee, Integer> {
                     ex.printStackTrace();
                 }
             });
+            System.out.println("The employee has been removed from the database.");
         }
 }
