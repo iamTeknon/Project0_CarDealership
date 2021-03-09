@@ -2,10 +2,10 @@ package com.automart.registry;
 
 import com.automart.exceptions.NonExistentCustomerException;
 import com.automart.exceptions.NonExistentEntityException;
-import com.automart.jdbc.crud.Dao;
-import com.automart.jdbc.crud.ImplementAutomartCarDao;
-import com.automart.jdbc.crud.ImplementCustomerCarDao;
-import com.automart.jdbc.crud.ImplementCustomerDao;
+import com.automart.jdbc.dao.Dao;
+import com.automart.jdbc.dao.ImplementAutomartCarDao;
+import com.automart.jdbc.dao.ImplementCustomerCarDao;
+import com.automart.jdbc.dao.ImplementCustomerDao;
 import com.automart.jdbc.entities.AutomartCar;
 import com.automart.jdbc.entities.Customer;
 import com.automart.jdbc.entities.CustomerCar;

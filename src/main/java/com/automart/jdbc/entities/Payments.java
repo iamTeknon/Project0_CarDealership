@@ -1,4 +1,4 @@
-package com.automart.finance;
+package com.automart.jdbc.entities;
 
 
 public class Payments {

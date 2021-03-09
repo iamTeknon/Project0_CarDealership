@@ -1,7 +1,7 @@
 package com.automart.registry;
 
-import com.automart.jdbc.crud.Dao;
-import com.automart.jdbc.crud.ImplementAutomartCarDao;
+import com.automart.jdbc.dao.Dao;
+import com.automart.jdbc.dao.ImplementAutomartCarDao;
 import com.automart.jdbc.entities.AutomartCar;
 
 import java.math.BigDecimal;

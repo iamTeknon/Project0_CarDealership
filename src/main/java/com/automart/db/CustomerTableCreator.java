@@ -25,8 +25,8 @@ public class CustomerTableCreator {
 
     public static void main(String[] args) throws SQLException {
 
-        CustomerTableCreator ctm = new CustomerTableCreator();
-        ctm.connection();
+        CustomerTableCreator ctc = new CustomerTableCreator();
+        ctc.connection();
 
     }
 

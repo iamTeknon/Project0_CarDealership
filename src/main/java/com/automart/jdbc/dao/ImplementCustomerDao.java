@@ -1,15 +1,14 @@
-package com.automart.jdbc.crud;
+package com.automart.jdbc.dao;
 
 import com.automart.jdbc.connect.AwsConnection;
 import com.automart.jdbc.entities.Customer;
-
 import java.sql.*;
 import java.util.Objects;
 import java.util.Optional;
 
 // The following code was borrowed from Hiram Kamau and modified for this project
 // https://stackabuse.com/working-with-postgresql-in-java/
-public class ImplementCustomerDao implements Dao<Customer, Integer>{
+public class ImplementCustomerDao implements Dao<Customer, Integer> {
     private final Optional<Connection> connection;
 
     public ImplementCustomerDao() {
@@ -28,10 +27,7 @@ public class ImplementCustomerDao implements Dao<Customer, Integer>{
         return connection.flatMap(conn -> {
             Optional<Integer> generatedId = Optional.empty();
 
-            try (PreparedStatement statement =
-                         conn.prepareStatement(
-                                 sql,
-                                 Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setString(1, nonNullCustomer.getLastName());
                 statement.setString(2, nonNullCustomer.getFirstName());
                 statement.setString(3, nonNullCustomer.getEmail());

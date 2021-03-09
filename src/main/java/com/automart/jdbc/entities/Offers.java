@@ -1,10 +1,9 @@
-package com.automart.finance;
+package com.automart.jdbc.entities;
 
 import com.automart.exceptions.NonExistentCustomerException;
 import com.automart.exceptions.NonExistentEntityException;
-import com.automart.jdbc.crud.Dao;
-import com.automart.jdbc.crud.ImplementAutomartCarDao;
-import com.automart.jdbc.entities.AutomartCar;
+import com.automart.jdbc.dao.Dao;
+import com.automart.jdbc.dao.ImplementAutomartCarDao;
 import com.automart.registry.CustomerCarRegistration;
 import com.automart.ui.SignInPad;
 
@@ -14,9 +13,21 @@ import java.util.Scanner;
 
 public class Offers {
     private static final Scanner scan = new Scanner(System.in);
-    private static final AutomartCar ac = new AutomartCar();
     private static final SignInPad sip = new SignInPad();
     private static final Dao<AutomartCar, Integer> AUTOMART_CAR_DAO = new ImplementAutomartCarDao();
+    private int offerId;
+    private int customerId;
+    private int vehicleId;
+    private double offer;
+    private String verdict;
+
+    public Offers(int offerId, int customerId, int vehicleId, double offer, String verdict){
+        this.offerId = offerId;
+        this.customerId = customerId;
+        this.vehicleId = vehicleId;
+        this.offer = offer;
+        this.verdict = verdict;
+    }
 
     public Offers(){
     }
@@ -57,6 +68,46 @@ public class Offers {
                 sip.signInOptions();
             }
         }
+    }
+
+    public String getVerdict() {
+        return verdict;
+    }
+
+    public void setVerdict(String verdict) {
+        this.verdict = verdict;
+    }
+
+    public int getOfferId() {
+        return offerId;
+    }
+
+    public void setOfferId(int offerId) {
+        this.offerId = offerId;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public int getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public double getOffer() {
+        return offer;
+    }
+
+    public void setOffer(double offer) {
+        this.offer = offer;
     }
 
     // The following code was borrowed from Hiram Kamau and modified for this project

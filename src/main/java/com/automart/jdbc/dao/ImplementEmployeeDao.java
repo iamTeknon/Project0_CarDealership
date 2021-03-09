@@ -1,4 +1,4 @@
-package com.automart.jdbc.crud;
+package com.automart.jdbc.dao;
 
 import com.automart.jdbc.connect.AwsConnection;
 import com.automart.jdbc.entities.Employee;
@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ImplementEmployeeDao implements Dao<Employee, Integer>{
+public class ImplementEmployeeDao implements Dao<Employee, Integer> {
         private final Optional<Connection> connection;
 
     public ImplementEmployeeDao() {

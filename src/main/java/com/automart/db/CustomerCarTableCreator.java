@@ -11,7 +11,6 @@ public class CustomerCarTableCreator {
     private final String user = "postgres";
     private final String password = "postgres";
 
-    // TODO: Need to make CUSTOMER_ID a Foreign key to customers table
     private static final String createTableSQL = "CREATE TABLE project0.customer_cars " +
             "(CAR_ID SERIAL PRIMARY KEY, " +
             " CUSTOMER_ID INT REFERENCES project0.customers(customer_id), " +
@@ -24,8 +23,8 @@ public class CustomerCarTableCreator {
 
     public static void main(String[] args) throws SQLException {
 
-        CustomerCarTableCreator cctm = new CustomerCarTableCreator();
-        cctm.connection();
+        CustomerCarTableCreator cctc = new CustomerCarTableCreator();
+        cctc.connection();
 
     }
 

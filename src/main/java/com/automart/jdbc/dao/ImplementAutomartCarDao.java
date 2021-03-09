@@ -1,4 +1,4 @@
-package com.automart.jdbc.crud;
+package com.automart.jdbc.dao;
 
 import com.automart.jdbc.connect.AwsConnection;
 import com.automart.jdbc.entities.AutomartCar;
@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer>{
+public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer> {
     private final Optional<Connection> connection;
 
     public ImplementAutomartCarDao() {
@@ -19,8 +19,7 @@ public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer>{
     public Optional<Integer> save(AutomartCar car) {
         String message = "The car to be added should not be null";
         AutomartCar nonNullAutomartCar = Objects.requireNonNull(car, message);
-        String sql = "INSERT INTO "
-                + "project0.automart_cars(year, make, model, color, price) "
+        String sql = "INSERT INTO project0.automart_cars(year, make, model, color, price) "
                 + "VALUES(?, ?, ?, ?, ?)";
 
         return connection.flatMap(conn -> {
@@ -70,7 +69,7 @@ public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer>{
                     String color = resultSet.getString("color");
                     BigDecimal price = resultSet.getBigDecimal("price");
 
-                    System.out.println(automart_car_id + "  " +  year + ", " + make + "  " + model
+                    System.out.println(automart_car_id + "  " +  year + "  " + make + "  " + model
                             + "  " + color + "  " + price);
 
                     automartCar = Optional.of(
@@ -98,7 +97,7 @@ public class ImplementAutomartCarDao implements Dao<AutomartCar, Integer>{
                     String color = resultSet.getString("color");
                     BigDecimal price = resultSet.getBigDecimal("price");
 
-                    System.out.println(automart_car_id + "  " +  year + ", " + make + "  " + model
+                    System.out.println(automart_car_id + "  " +  year + "  " + make + "  " + model
                             + "  " + color + "  " + price);
 
                     automartCar = Optional.of(

@@ -2,16 +2,18 @@ package com.automart.ui;
 
 import com.automart.exceptions.NonExistentCustomerException;
 import com.automart.exceptions.NonExistentEntityException;
-import com.automart.finance.Offers;
-import com.automart.jdbc.crud.Dao;
-import com.automart.jdbc.crud.ImplementAutomartCarDao;
-import com.automart.jdbc.crud.ImplementCustomerDao;
-import com.automart.jdbc.crud.ImplementEmployeeDao;
+import com.automart.jdbc.crud.UpdateAutomartCarInfo;
+import com.automart.jdbc.crud.UpdateCustomerInfo;
+import com.automart.jdbc.crud.UpdateEmployeeInfo;
+import com.automart.jdbc.entities.Offers;
+import com.automart.jdbc.dao.Dao;
+import com.automart.jdbc.dao.ImplementAutomartCarDao;
+import com.automart.jdbc.dao.ImplementCustomerDao;
+import com.automart.jdbc.dao.ImplementEmployeeDao;
 import com.automart.jdbc.entities.AutomartCar;
 import com.automart.jdbc.entities.Customer;
 import com.automart.jdbc.entities.Employee;
 import com.automart.registry.*;
-
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -21,58 +23,57 @@ public class SignInPad {
     private static final Dao<Employee, Integer> EMPLOYEE_DAO = new ImplementEmployeeDao();
     private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementCustomerDao();
     private static final Dao<AutomartCar, Integer> AUTOMART_CAR_DAO = new ImplementAutomartCarDao();
-    private String initialOption;
-    private int customerId;
-    private String viewOption;
-    private int employeeId;
 
     public SignInPad(){
     }
 
-    // TODO: Need to add an update account info option
     public void signInOptions() throws SQLException, NonExistentEntityException {
-        System.out.println("Enter " +
+        System.out.println("Howdy! Please enter " +
                 "'r' to register for a customer account, " +
                 "'l' for customer log in, or " +
                 "'e' for employee log in: ");
-        initialOption = scan.nextLine();
+
+        String initialOption = scan.nextLine();
+
         if(initialOption.equalsIgnoreCase("r")) {
             CustomerRegistration cr = new CustomerRegistration();
             cr.getCustomerInfo();
             signInOptions();
-        }else if(initialOption.equalsIgnoreCase("l")){
+        }
+        else if(initialOption.equalsIgnoreCase("l")){
             System.out.println("Please enter your customer ID: ");
-            customerId = scan.nextInt();
+            int customerId = scan.nextInt();
             scan.nextLine();
+
             try{
-                Customer customer = getCustomer(customerId);
+                Customer c = getCustomer(customerId);
             }catch(NonExistentEntityException ex){
                 ex.printStackTrace();
                 System.out.println("That customer is not in the database. Please make sure " +
-                        "you have the correct customer id #.");
+                        "you have the correct customer id number.");
                 signInOptions();
             }
 
             boolean flag = true;
             while(flag) {
-                System.out.println("Enter " +
+                System.out.println("Thank you for shopping at Automart! Please enter " +
                     "'v' to view cars for sale, " +
                     "'o' to make an offer on a vehicle, " +
                     "'m' to view cars you previously purchased, " +
                     "'p' to view remaining payments on a car, " +
-                    "or 'e' to exit: ");
-                viewOption = scan.nextLine();
+                    "or 'x' to exit: ");
+                String viewOption = scan.nextLine();
 
                 if (viewOption.equalsIgnoreCase("v")) {
                     try{
                         AutomartCar ac = getAutomartCar();
                     }catch (NonExistentEntityException ex){
                         ex.printStackTrace();
-                        System.out.println("That car is not in the database. Please make " +
-                                "sure you entered the correct Automart car id number.");
+                        signInOptions();
                     }
 
-                }else if(viewOption.equalsIgnoreCase("o")){
+                }
+                else if(viewOption.equalsIgnoreCase("o")){
                     System.out.println("Please enter the Automart car id number for the vehicle you " +
                             "would like to make an offer on: ");
                     int myCarChoice = scan.nextInt();
@@ -80,24 +81,29 @@ public class SignInPad {
                     Offers offer = new Offers();
                     offer.makeOffer(myCarChoice);
                     signInOptions();
-                }else if (viewOption.equalsIgnoreCase("m")) {
+                }
+                else if (viewOption.equalsIgnoreCase("m")) {
                     flag = false;
                     // TODO: Jump to customer account registry db
 
-                } else if (viewOption.equalsIgnoreCase("p")) {
+                }
+                else if (viewOption.equalsIgnoreCase("p")) {
                     flag = false;
                     // TODO: Jump to balance column in CustomerCars table
 
-                } else if (viewOption.equalsIgnoreCase("e")) {
+                }
+                else if (viewOption.equalsIgnoreCase("e")) {
                     flag = false;
                     signInOptions();
-                } else {
+                }
+                else {
                     System.out.println("Please make sure you entered your choice correctly");
                 }
             }
-        }else if(initialOption.equalsIgnoreCase("e")){
+        }
+        else if(initialOption.equalsIgnoreCase("e")){
             System.out.println("Please enter your employee ID: ");
-            employeeId = scan.nextInt();
+            int employeeId = scan.nextInt();
             scan.nextLine();
             boolean employeeOptionsFlag = true;
             try{
@@ -132,7 +138,7 @@ public class SignInPad {
                         break;
                     case "e":
                         System.out.println("Please enter the employee id number: ");
-                        int employeeId = scan.nextInt();
+                        employeeId = scan.nextInt();
                         scan.nextLine();
                         UpdateEmployeeInfo uei = new UpdateEmployeeInfo();
                         uei.updateInfo(employeeId);
@@ -158,14 +164,12 @@ public class SignInPad {
                     default:
                         break;
                 }
-
             }
-
         }
         signInOptions();
     }
 
-    // The following code was borrowed from Hiram Kamau and modified for this project
+    // The following methods were borrowed from Hiram Kamau and modified for this project
     // https://stackabuse.com/working-with-postgresql-in-java/
     public static Employee getEmployee(int id) throws NonExistentEntityException {
         Optional<Employee> employee = EMPLOYEE_DAO.get(id);
@@ -177,8 +181,6 @@ public class SignInPad {
         return customer.orElseThrow(NonExistentCustomerException::new);
     }
 
-    // The following code was borrowed from Hiram Kamau and modified for this project
-    // https://stackabuse.com/working-with-postgresql-in-java/
     public static AutomartCar getAutomartCar() throws NonExistentEntityException {
         Optional<AutomartCar> automartCar = AUTOMART_CAR_DAO.getEverything();
         return automartCar.orElseThrow(NonExistentCustomerException::new);

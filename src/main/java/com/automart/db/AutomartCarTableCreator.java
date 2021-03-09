@@ -21,8 +21,8 @@ public class AutomartCarTableCreator {
 
     public static void main(String[] args) throws SQLException {
 
-        AutomartCarTableCreator actm = new AutomartCarTableCreator();
-        actm.connection();
+        AutomartCarTableCreator actc = new AutomartCarTableCreator();
+        actc.connection();
 
     }
 

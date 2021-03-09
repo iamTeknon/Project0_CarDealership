@@ -1,4 +1,4 @@
-package com.automart.jdbc.crud;
+package com.automart.jdbc.dao;
 
 import com.automart.jdbc.connect.AwsConnection;
 import com.automart.jdbc.entities.CustomerCar;
@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ImplementCustomerCarDao implements Dao<CustomerCar, Integer>{
+public class ImplementCustomerCarDao implements Dao<CustomerCar, Integer> {
     private final Optional<Connection> connection;
 
     public ImplementCustomerCarDao() {
@@ -61,59 +61,59 @@ public class ImplementCustomerCarDao implements Dao<CustomerCar, Integer>{
             String sql = "SELECT car_id, customer_id, year, make, model, color, monthly_payments, balance" +
             " FROM project0.customer_cars WHERE customer_id = " + id;
             try (Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql)) {
+                ResultSet resultSet = statement.executeQuery(sql)) {
 
-            if (resultSet.next()) {
-            int car_id = resultSet.getInt("car_id");
-            int customer_id = resultSet.getInt("customer_id");
-            String year = resultSet.getString("year");
-            String make = resultSet.getString("make");
-            String model = resultSet.getString("model");
-            String color = resultSet.getString("color");
-            double monthly = resultSet.getDouble("monthly_payments");
-            double balance = resultSet.getDouble("balance");
+                if (resultSet.next()) {
+                int car_id = resultSet.getInt("car_id");
+                int customer_id = resultSet.getInt("customer_id");
+                String year = resultSet.getString("year");
+                String make = resultSet.getString("make");
+                String model = resultSet.getString("model");
+                String color = resultSet.getString("color");
+                double monthly = resultSet.getDouble("monthly_payments");
+                double balance = resultSet.getDouble("balance");
 
-            System.out.println(car_id + "  " + customer_id + "  " +  year + "  " + make + "  " + model
-            + "  " + color + "  " + monthly + "  "  + balance);
+                System.out.println(car_id + "  " + customer_id + "  " +  year + "  " + make + "  " + model
+                + "  " + color + "  " + monthly + "  "  + balance);
 
-            customerCar = Optional.of(
-            new CustomerCar(car_id, customer_id, year, make, model, color, monthly, balance));
-            }
+                customerCar = Optional.of(
+                    new CustomerCar(car_id, customer_id, year, make, model, color, monthly, balance));
+                }
             } catch (SQLException ex) {
-            ex.printStackTrace();
+                ex.printStackTrace();
             }
             return customerCar;
             });
             }
 
         public Optional<CustomerCar> getEverything() {
-                return connection.flatMap(conn -> {
-                        Optional<CustomerCar> customerCar = Optional.empty();
-                        String sql = "SELECT * FROM project0.customer_cars";
-                        try (Statement statement = conn.createStatement();
-                             ResultSet resultSet = statement.executeQuery(sql)) {
+            return connection.flatMap(conn -> {
+                Optional<CustomerCar> customerCar = Optional.empty();
+                String sql = "SELECT * FROM project0.customer_cars";
+                try (Statement statement = conn.createStatement();
+                     ResultSet resultSet = statement.executeQuery(sql)) {
 
-                                while (resultSet.next()) {
-                                        int car_id = resultSet.getInt("car_id");
-                                        int customer_id = resultSet.getInt("customer_id");
-                                        String year = resultSet.getString("year");
-                                        String make = resultSet.getString("make");
-                                        String model = resultSet.getString("model");
-                                        String color = resultSet.getString("color");
-                                        double monthly = resultSet.getDouble("monthly_payments");
-                                        double balance = resultSet.getDouble("balance");
+                    while (resultSet.next()) {
+                        int car_id = resultSet.getInt("car_id");
+                        int customer_id = resultSet.getInt("customer_id");
+                        String year = resultSet.getString("year");
+                        String make = resultSet.getString("make");
+                        String model = resultSet.getString("model");
+                        String color = resultSet.getString("color");
+                        double monthly = resultSet.getDouble("monthly_payments");
+                        double balance = resultSet.getDouble("balance");
 
-                                        System.out.println(car_id + "  " + customer_id + "  " +  year + "  " + make + "  " + model
-                                                + "  " + color + "  " + monthly + "  "  + balance);
+                        System.out.println(car_id + "  " + customer_id + "  " +  year + "  " + make + "  " + model
+                                + "  " + color + "  " + monthly + "  "  + balance);
 
-                                        customerCar = Optional.of(
-                                                new CustomerCar(car_id, customer_id, year, make, model, color, monthly, balance));
-                                }
-                        } catch (SQLException ex) {
-                                ex.printStackTrace();
-                        }
-                        return customerCar;
-                });
+                        customerCar = Optional.of(
+                                new CustomerCar(car_id, customer_id, year, make, model, color, monthly, balance));
+                    }
+                } catch (SQLException ex) {
+                        ex.printStackTrace();
+                }
+                return customerCar;
+        });
         }
 
 
@@ -147,7 +147,7 @@ public class ImplementCustomerCarDao implements Dao<CustomerCar, Integer>{
                 int numberOfUpdatedRows = statement.executeUpdate();
 
             } catch (SQLException ex) {
-            ex.printStackTrace();
+                ex.printStackTrace();
             }
             });
             }

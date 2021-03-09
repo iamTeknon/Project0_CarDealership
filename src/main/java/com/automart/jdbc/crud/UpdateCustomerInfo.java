@@ -1,9 +1,9 @@
-package com.automart.registry;
+package com.automart.jdbc.crud;
 
 import com.automart.exceptions.NonExistentCustomerException;
 import com.automart.exceptions.NonExistentEntityException;
-import com.automart.jdbc.crud.Dao;
-import com.automart.jdbc.crud.ImplementCustomerDao;
+import com.automart.jdbc.dao.Dao;
+import com.automart.jdbc.dao.ImplementCustomerDao;
 import com.automart.jdbc.entities.Customer;
 import com.automart.ui.SignInPad;
 

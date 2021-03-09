@@ -1,7 +1,7 @@
 package com.automart.registry;
 
-import com.automart.jdbc.crud.Dao;
-import com.automart.jdbc.crud.ImplementEmployeeDao;
+import com.automart.jdbc.dao.Dao;
+import com.automart.jdbc.dao.ImplementEmployeeDao;
 import com.automart.jdbc.entities.Employee;
 
 import java.sql.SQLException;

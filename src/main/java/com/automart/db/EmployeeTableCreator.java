@@ -11,7 +11,6 @@ public class EmployeeTableCreator {
     private final String user = "postgres";
     private final String password = "postgres";
 
-    // TODO: Need to make email a composite key
     private static final String createTableSQL = "CREATE TABLE project0.employees " +
             "(EMPLOYEE_ID SERIAL PRIMARY KEY," +
             " FIRST_NAME TEXT, " +
@@ -21,8 +20,8 @@ public class EmployeeTableCreator {
 
     public static void main(String[] args) throws SQLException {
 
-        EmployeeTableCreator etm = new EmployeeTableCreator();
-        etm.connection();
+        EmployeeTableCreator etc = new EmployeeTableCreator();
+        etc.connection();
 
     }
 

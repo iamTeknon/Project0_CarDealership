@@ -1,9 +1,8 @@
 package com.automart.registry;
 
-import com.automart.jdbc.crud.Dao;
-import com.automart.jdbc.crud.ImplementCustomerDao;
+import com.automart.jdbc.dao.Dao;
+import com.automart.jdbc.dao.ImplementCustomerDao;
 import com.automart.jdbc.entities.Customer;
-
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -30,13 +29,15 @@ public class CustomerRegistration {
     public void getCustomerInfo() throws SQLException {
 
         System.out.println("Howdy! Welcome to Automart! \nPlease enter your first name: ");
-        this.firstName = scan.nextLine();
-        System.out.println("Enter your last name: ");
-        this.lastName = scan.nextLine();
+        firstName = scan.nextLine();
+
+        System.out.println("Please enter your last name: ");
+        lastName = scan.nextLine();
+
         boolean phoneNumberFlag = false;
-        this.phoneNumber = "";
+        phoneNumber = "";
         while(!phoneNumberFlag){
-            System.out.println("Enter your phone number, including area code: ");
+            System.out.println("Please enter your phone number, including area code: ");
             String phoneNumberCheck = scan.nextLine();
             String regex = "^\\D?(\\d{3})\\D?\\D?(\\d{3})\\D?(\\d{4})$";
             Pattern p = Pattern.compile(regex);
@@ -49,10 +50,11 @@ public class CustomerRegistration {
                 System.out.println("Invalid phone number entry");
             }
         }
+
         boolean emailFlag = false;
-        this.email = "";
+        email = "";
         while(!emailFlag){
-            System.out.println("Enter your email: ");
+            System.out.println("Please enter your email: ");
             String emailCheck = scan.nextLine();
             String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+" +
                     "[a-zA-Z]{2,7}$";
@@ -66,14 +68,17 @@ public class CustomerRegistration {
                 System.out.println("Invalid email entry");
             }
         }
-        System.out.println("Enter your street address: ");
-        this.address = scan.nextLine();
+
+        System.out.println("Please enter your street address: ");
+        address = scan.nextLine();
+
         System.out.println("Enter your city: ");
-        this.city = scan.nextLine();
+        city = scan.nextLine();
+
         boolean stateFlag = false;
-        this.state = "";
+        state = "";
         while(!stateFlag){
-            System.out.println("Enter your state: ");
+            System.out.println("Please enter your state: ");
             String stateCheck = scan.nextLine();
             String regex = "^(AE|AL|AK|AP|AS|AZ|AR|CA|CO|CT|DE|DC|FM|FL|GA|GU|HI|ID" +
                     "|IL|IN|IA|KS|KY|LA|ME|MH|MD|MA|MI|MN|MS|MO|MP|MT|NE|NV|NH|NJ|NM" +
@@ -91,10 +96,11 @@ public class CustomerRegistration {
                 System.out.println("Invalid state entry");
             }
         }
+
         boolean zipFlag = false;
         this.zip = "";
         while(!zipFlag){
-            System.out.println("Enter your zip code: ");
+            System.out.println("Please enter your zip code: ");
             String zipCheck = scan.nextLine();
             String regex = "^\\d{5}(-\\d{4})?$";
             Pattern p = Pattern.compile(regex);
@@ -108,11 +114,11 @@ public class CustomerRegistration {
             }
         }
 
-        Customer customer = new Customer(id, lastName, firstName, email, phoneNumber, address, city, state, zip);
-        addCustomer(customer);
+        Customer c = new Customer(id, lastName, firstName, email, phoneNumber, address, city, state, zip);
+        addCustomer(c);
     }
 
-    // The following code was borrowed from Hiram Kamau and modified for this project
+    // The following method was borrowed from Hiram Kamau and modified for this project
     // https://stackabuse.com/working-with-postgresql-in-java/
     public static Optional<Integer> addCustomer(Customer customer) {
         return CUSTOMER_DAO.save(customer);

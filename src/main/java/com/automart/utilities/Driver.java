@@ -1,22 +1,14 @@
 package com.automart.utilities;
 
-import com.automart.exceptions.NonExistentCustomerException;
 import com.automart.exceptions.NonExistentEntityException;
-import com.automart.jdbc.crud.Dao;
-import com.automart.jdbc.crud.ImplementCustomerDao;
-import com.automart.jdbc.entities.Customer;
 import com.automart.ui.SignInPad;
-
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.Scanner;
 
 public class Driver {
-
-    private static final Scanner scan = new Scanner(System.in);
     private static final SignInPad sip = new SignInPad();
-    private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementCustomerDao();
+
+//    private static final Scanner scan = new Scanner(System.in);
+//    private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementCustomerDao();
 
     public static void main(String[] args) throws SQLException, NonExistentEntityException {
 
@@ -69,26 +61,26 @@ public class Driver {
     }
 
     // Static helper methods referenced above
-    public static Customer getCustomer(int id) throws NonExistentEntityException {
-        Optional<Customer> customer = CUSTOMER_DAO.get(id);
-        return customer.orElseThrow(NonExistentCustomerException::new);
-    }
-
-    public static Collection<Customer> getAllCustomers() {
-        return CUSTOMER_DAO.getAll();
-    }
-
-    public static void updateCustomer(Customer customer) {
-        CUSTOMER_DAO.update(customer);
-    }
-
-    public static Optional<Integer> addCustomer(Customer customer) {
-        return CUSTOMER_DAO.save(customer);
-    }
-
-    public static void deleteCustomer(Customer customer) {
-        CUSTOMER_DAO.delete(customer);
-    }
+//    public static Customer getCustomer(int id) throws NonExistentEntityException {
+//        Optional<Customer> customer = CUSTOMER_DAO.get(id);
+//        return customer.orElseThrow(NonExistentCustomerException::new);
+//    }
+//
+//    public static Collection<Customer> getAllCustomers() {
+//        return CUSTOMER_DAO.getAll();
+//    }
+//
+//    public static void updateCustomer(Customer customer) {
+//        CUSTOMER_DAO.update(customer);
+//    }
+//
+//    public static Optional<Integer> addCustomer(Customer customer) {
+//        return CUSTOMER_DAO.save(customer);
+//    }
+//
+//    public static void deleteCustomer(Customer customer) {
+//        CUSTOMER_DAO.delete(customer);
+//    }
 
 
 
