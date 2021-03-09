@@ -29,15 +29,16 @@ public class UpdateCustomerInfo {
     }
 
     public void updateInfo(int customerId) throws SQLException, NonExistentEntityException {
-        boolean updateFlag = true;
         try{
             Customer customer = getCustomer(customerId);
         }catch(NonExistentEntityException ex){
             ex.printStackTrace();
-            System.out.println("That customer is not in the database. Please make sure " +
-                    "you have the correct customer id #.");
+            System.out.println("I'm sorry, but that customer is not in the database. Please make sure " +
+                    "you have entered the correct customer id number. You will now be redirected " +
+                    "to the sign in options menu.");
             sip.signInOptions();
         }
+        boolean updateFlag = true;
         if(updateFlag){
             do{
                 System.out.println("Please enter " +
@@ -60,6 +61,8 @@ public class UpdateCustomerInfo {
                         customer.setFirstName(newFirstName);
                         customer.setId(customerId);
                         updateCustomer(customer);
+                        System.out.println("The customers first name has been updated in our database.");
+                        System.out.println("You will now be redirected to the sign in options menu.");
                         break;
                     case "l":
                         System.out.println("Please enter the new last name: ");
@@ -68,6 +71,8 @@ public class UpdateCustomerInfo {
                         customer.setLastName(newLastName);
                         customer.setId(customerId);
                         updateCustomer(customer);
+                        System.out.println("The customers last name has been updated in our database.");
+                        System.out.println("You will now be redirected to the sign in options menu.");
                         break;
 
                     case "p":
@@ -76,6 +81,8 @@ public class UpdateCustomerInfo {
                         customer.setPhone(newNumber);
                         customer.setId(customerId);
                         updateCustomer(customer);
+                        System.out.println("The customers phone number has been updated in our database.");
+                        System.out.println("You will now be redirected to the sign in options menu.");
                         break;
                     case "e":
                         System.out.println("Please enter the new email: ");
@@ -83,6 +90,8 @@ public class UpdateCustomerInfo {
                         customer.setEmail(newEmail);
                         customer.setId(customerId);
                         updateCustomer(customer);
+                        System.out.println("The customers email has been updated in our database.");
+                        System.out.println("You will now be redirected to the sign in options menu.");
                         break;
                     case "a":
                         System.out.println("Please enter the new street address: ");
@@ -90,6 +99,8 @@ public class UpdateCustomerInfo {
                         customer.setAddress(newAddress);
                         customer.setId(customerId);
                         updateCustomer(customer);
+                        System.out.println("The customers street address has been updated in our database.");
+                        System.out.println("You will now be redirected to the sign in options menu.");
                         break;
                     case "c":
                         System.out.println("Please enter the new city: ");
@@ -97,6 +108,8 @@ public class UpdateCustomerInfo {
                         customer.setCity(newCity);
                         customer.setId(customerId);
                         updateCustomer(customer);
+                        System.out.println("The customers city has been updated in our database.");
+                        System.out.println("You will now be redirected to the sign in options menu.");
                         break;
                     case "s":
                         System.out.println("Please enter the new state: ");
@@ -104,6 +117,8 @@ public class UpdateCustomerInfo {
                         customer.setState(newState);
                         customer.setId(customerId);
                         updateCustomer(customer);
+                        System.out.println("The customers state has been updated in our database.");
+                        System.out.println("You will now be redirected to the sign in options menu.");
                         break;
                     case "z":
                         System.out.println("Please enter the new zip code: ");
@@ -111,10 +126,14 @@ public class UpdateCustomerInfo {
                         customer.setZip(newZip);
                         customer.setId(customerId);
                         updateCustomer(customer);
+                        System.out.println("The customers zip code has been updated in our database.");
+                        System.out.println("You will now be redirected to the sign in options menu.");
                         break;
                     case "d":
                         customer.setId(customerId);
                         deleteCustomer(customer);
+                        System.out.println("The customer has been deleted from our database.");
+                        System.out.println("You will now be redirected to the sign in options menu.");
                         break;
                     case "x":
                         updateFlag = false;

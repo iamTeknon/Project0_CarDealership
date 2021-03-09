@@ -24,7 +24,7 @@ public class UpdateEmployeeInfo {
             Employee employee = getEmployee(employeeId);
         }catch (NonExistentEntityException ex){
             ex.printStackTrace();
-            System.out.println("That employee is not in the database. Please make " +
+            System.out.println("I'm sorry, but that employee is not in our database. Please make " +
                     "sure you entered the correct employee id number.");
         }
         boolean updateFlag = false;
@@ -45,6 +45,8 @@ public class UpdateEmployeeInfo {
                     employee.setFirstName(newFirstName);
                     employee.setId(employeeId);
                     updateEmployee(employee);
+                    System.out.println("The employees first name has been updated in our database.");
+                    System.out.println("You will now be redirected to the sign in options menu.");
                     break;
                 case "l":
                     System.out.println("Please enter the new last name: ");
@@ -53,6 +55,8 @@ public class UpdateEmployeeInfo {
                     employee.setLastName(newLastName);
                     employee.setId(employeeId);
                     updateEmployee(employee);
+                    System.out.println("The employees last name has been updated in our database.");
+                    System.out.println("You will now be redirected to the sign in options menu.");
                     break;
                 case "p":
                     System.out.println("Please enter the new phone number: ");
@@ -60,6 +64,8 @@ public class UpdateEmployeeInfo {
                     employee.setPhone(newNumber);
                     employee.setId(employeeId);
                     updateEmployee(employee);
+                    System.out.println("The employees phone number has been updated in our database.");
+                    System.out.println("You will now be redirected to the sign in options menu.");
                     break;
                 case "e":
                     System.out.println("Please enter the new email: ");
@@ -67,10 +73,14 @@ public class UpdateEmployeeInfo {
                     employee.setEmail(newEmail);
                     employee.setId(employeeId);
                     updateEmployee(employee);
+                    System.out.println("The employees email has been updated in our database.");
+                    System.out.println("You will now be redirected to the sign in options menu.");
                     break;
                 case "r":
                     employee.setId(employeeId);
                     deleteEmployee(employee);
+                    System.out.println("The employee has been deleted from our database.");
+                    System.out.println("You will now be redirected to the sign in options menu.");
                     break;
                 case "x":
                     updateFlag = true;

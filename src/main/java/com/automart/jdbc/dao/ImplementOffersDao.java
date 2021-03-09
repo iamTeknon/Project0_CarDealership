@@ -3,6 +3,7 @@ package com.automart.jdbc.dao;
 import com.automart.jdbc.connect.AwsConnection;
 import com.automart.jdbc.entities.Offers;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Objects;
 import java.util.Optional;
@@ -30,7 +31,7 @@ public class ImplementOffersDao implements Dao<Offers, Integer> {
                          conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setInt(1, nonNullOffers.getCustomerId());
                 statement.setInt(2, nonNullOffers.getVehicleId());
-                statement.setDouble(3, nonNullOffers.getOffer());
+                statement.setBigDecimal(3, nonNullOffers.getOffer());
                 statement.setString(4, nonNullOffers.getVerdict());
 
 
@@ -63,7 +64,7 @@ public class ImplementOffersDao implements Dao<Offers, Integer> {
                     int offer_id = resultSet.getInt("offer_id");
                     int customer_id = resultSet.getInt("customer_id");
                     int automart_car_id = resultSet.getInt("automart_car_id");
-                    double myOffer = resultSet.getDouble("offer");
+                    BigDecimal myOffer = resultSet.getBigDecimal("offer");
                     String verdict = resultSet.getString("verdict");
 
                     System.out.println(offer_id + "  " + customer_id + "  " +  automart_car_id + "  "
@@ -90,11 +91,11 @@ public class ImplementOffersDao implements Dao<Offers, Integer> {
                     int offer_id = resultSet.getInt("offer_id");
                     int customer_id = resultSet.getInt("customer_id");
                     int automart_car_id = resultSet.getInt("automart_car_id");
-                    double myOffer = resultSet.getDouble("offer");
+                    BigDecimal myOffer = resultSet.getBigDecimal("offer");
                     String verdict = resultSet.getString("verdict");
 
                     System.out.println(offer_id + "  " + customer_id + "  " +  automart_car_id + "  "
-                            + offer + "  " + verdict);
+                            + myOffer + "  " + verdict);
 
                     offer = Optional.of(
                             new Offers(offer_id, customer_id, automart_car_id, myOffer, verdict));
@@ -124,7 +125,7 @@ public class ImplementOffersDao implements Dao<Offers, Integer> {
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
                 statement.setInt(1,nonNullOffers.getCustomerId());
                 statement.setInt(2, nonNullOffers.getVehicleId());
-                statement.setDouble(3, nonNullOffers.getOffer());
+                statement.setBigDecimal(3, nonNullOffers.getOffer());
                 statement.setInt(4, nonNullOffers.getOfferId());
                 statement.setString(5, nonNullOffers.getVerdict());
 

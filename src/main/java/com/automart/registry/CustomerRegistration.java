@@ -47,7 +47,8 @@ public class CustomerRegistration {
                 phoneNumberFlag = true;
             }
             else{
-                System.out.println("Invalid phone number entry");
+                System.out.println("I'm sorry, but that is an invalid phone number entry. Please " +
+                        "try again.");
             }
         }
 
@@ -65,7 +66,7 @@ public class CustomerRegistration {
                 emailFlag = true;
             }
             else{
-                System.out.println("Invalid email entry");
+                System.out.println("I'm sorry, but that is an invalid email entry. Please try again.");
             }
         }
 
@@ -93,7 +94,8 @@ public class CustomerRegistration {
                 stateFlag = true;
             }
             else{
-                System.out.println("Invalid state entry");
+                System.out.println("I'm sorry, but that is an invalid state entry. Please make sure " +
+                        "you enter the state abbreviation only.");
             }
         }
 
@@ -110,7 +112,8 @@ public class CustomerRegistration {
                 zipFlag = true;
             }
             else{
-                System.out.println("Invalid zipcode entry");
+                System.out.println("I'm sorry, but that is an invalid zipcode entry. Please " +
+                        "try again.");
             }
         }
 

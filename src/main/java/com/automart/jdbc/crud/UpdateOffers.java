@@ -7,6 +7,7 @@ import com.automart.jdbc.dao.ImplementOffersDao;
 import com.automart.jdbc.entities.Offers;
 import com.automart.ui.SignInPad;
 
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -14,8 +15,12 @@ public class UpdateOffers {
     private static final Scanner scan = new Scanner(System.in);
     private static final Dao<Offers, Integer> OFFERS_CAR_DAO = new ImplementOffersDao();
     private static final SignInPad sip = new SignInPad();
-    private static final Offers o = new Offers();
+    private int id;
 
+    public void updateOffers() throws SQLException, NonExistentEntityException{
+        System.out.println("Enter 'a' to accept an offer or 'r' to reject an offer: ");
+
+    }
 
 
     // The following code was borrowed from Hiram Kamau and modified for this project

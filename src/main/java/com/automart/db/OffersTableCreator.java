@@ -14,7 +14,7 @@ public class OffersTableCreator {
             "(OFFER_ID SERIAL PRIMARY KEY," +
             " CUSTOMER_ID INT REFERENCES project0.customers(customer_id), " +
             " AUTOMART_CAR_ID INT REFERENCES project0.automart_cars(automart_car_id), " +
-            " OFFER NUMERIC(10,2)" +
+            " OFFER NUMERIC(10,2)," +
             " VERDICT TEXT)";
 
     public static void main(String[] args) throws SQLException {

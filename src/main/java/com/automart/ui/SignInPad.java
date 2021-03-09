@@ -5,15 +5,17 @@ import com.automart.exceptions.NonExistentEntityException;
 import com.automart.jdbc.crud.UpdateAutomartCarInfo;
 import com.automart.jdbc.crud.UpdateCustomerInfo;
 import com.automart.jdbc.crud.UpdateEmployeeInfo;
-import com.automart.jdbc.entities.Offers;
-import com.automart.jdbc.dao.Dao;
-import com.automart.jdbc.dao.ImplementAutomartCarDao;
-import com.automart.jdbc.dao.ImplementCustomerDao;
-import com.automart.jdbc.dao.ImplementEmployeeDao;
+import com.automart.jdbc.crud.UpdateOffers;
+import com.automart.jdbc.dao.*;
 import com.automart.jdbc.entities.AutomartCar;
 import com.automart.jdbc.entities.Customer;
 import com.automart.jdbc.entities.Employee;
-import com.automart.registry.*;
+import com.automart.jdbc.entities.Offers;
+import com.automart.registry.AutomartCarRegistration;
+import com.automart.registry.CustomerRegistration;
+import com.automart.registry.EmployeeRegistration;
+import com.automart.registry.OfferRegistration;
+
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -23,6 +25,8 @@ public class SignInPad {
     private static final Dao<Employee, Integer> EMPLOYEE_DAO = new ImplementEmployeeDao();
     private static final Dao<Customer, Integer> CUSTOMER_DAO = new ImplementCustomerDao();
     private static final Dao<AutomartCar, Integer> AUTOMART_CAR_DAO = new ImplementAutomartCarDao();
+    private static final Dao<Offers, Integer> OFFERS_CAR_DAO = new ImplementOffersDao();
+    private int customerId;
 
     public SignInPad(){
     }
@@ -42,15 +46,16 @@ public class SignInPad {
         }
         else if(initialOption.equalsIgnoreCase("l")){
             System.out.println("Please enter your customer ID: ");
-            int customerId = scan.nextInt();
+            this.customerId = scan.nextInt();
             scan.nextLine();
 
             try{
                 Customer c = getCustomer(customerId);
             }catch(NonExistentEntityException ex){
                 ex.printStackTrace();
-                System.out.println("That customer is not in the database. Please make sure " +
-                        "you have the correct customer id number.");
+                System.out.println("I'm sorry, but you are not in the database. Please make sure " +
+                        "you enter the correct customer id number. You will now be redirected to " +
+                        "the sign in options menu.");
                 signInOptions();
             }
 
@@ -71,28 +76,26 @@ public class SignInPad {
                         ex.printStackTrace();
                         signInOptions();
                     }
-
                 }
                 else if(viewOption.equalsIgnoreCase("o")){
-                    System.out.println("Please enter the Automart car id number for the vehicle you " +
-                            "would like to make an offer on: ");
-                    int myCarChoice = scan.nextInt();
-                    scan.nextLine();
-                    Offers offer = new Offers();
-                    offer.makeOffer(myCarChoice);
+                    OfferRegistration or = new OfferRegistration("pending");
+                    or.getOfferInfo();
                     signInOptions();
                 }
                 else if (viewOption.equalsIgnoreCase("m")) {
                     flag = false;
-                    // TODO: Jump to customer account registry db
-
+                    // TODO: make sql code to print out customer vehicles according to customer id
                 }
                 else if (viewOption.equalsIgnoreCase("p")) {
                     flag = false;
-                    // TODO: Jump to balance column in CustomerCars table
-
+                    // TODO: figure out how to do continuous calculations on balance and remaining payments
+                    //      possibly use 72 month payment plan to subtract # of months already paid to
+                    //      determine how many payments left, but need to go overboard and be able to
+                    //      account for overpayments, so it needs to keep track of total payments amount made
+                    //      and subtract that from balance and divide stated monthly payment plan by remaining
+                    //      balance
                 }
-                else if (viewOption.equalsIgnoreCase("e")) {
+                else if (viewOption.equalsIgnoreCase("x")) {
                     flag = false;
                     signInOptions();
                 }
@@ -110,8 +113,9 @@ public class SignInPad {
                 Employee employee = getEmployee(employeeId);
             }catch(NonExistentEntityException ex){
                 ex.printStackTrace();
-                System.out.println("That employee is not in the database. Please make sure " +
-                        "you entered the correct employee id number.");
+                System.out.println("I'm sorry, but you are not in our database. Please make sure " +
+                        "you entered your employee id number correctly. You will now be redirected " +
+                        "to the sign in options menu.");
                 employeeOptionsFlag = false;
             }
             while(employeeOptionsFlag){
@@ -121,7 +125,7 @@ public class SignInPad {
                     "'e' to update employee info, " +
                     "'n' to add a car, " +
                     "'u' to update car , " +
-                    "'o' to view an offer, " +
+                    "'o' to view offers, " +
                     "or 'x' to exit: ");
                 String employeeOption = scan.nextLine();
                 switch (employeeOption){
@@ -155,7 +159,16 @@ public class SignInPad {
                         uaci.updateCarInfo(automartCarId);
                         break;
                     case "o":
-                        // TODO: add code to review offers and option to either accept or reject
+                        try{
+                            Offers o = getOffers();
+                        }catch (NonExistentEntityException ex){
+                            ex.printStackTrace();
+                            System.out.println("Something has gone wrong. You will be redirected " +
+                                    "to the sign in options menu. Sorry for any inconvenience.");
+                            signInOptions();
+                        }
+                        UpdateOffers uo = new UpdateOffers();
+                        uo.updateOffers();
                         break;
                     case "x":
                         employeeOptionsFlag = false;
@@ -184,6 +197,11 @@ public class SignInPad {
     public static AutomartCar getAutomartCar() throws NonExistentEntityException {
         Optional<AutomartCar> automartCar = AUTOMART_CAR_DAO.getEverything();
         return automartCar.orElseThrow(NonExistentCustomerException::new);
+    }
+
+    public static Offers getOffers() throws NonExistentEntityException {
+        Optional<Offers> offer = OFFERS_CAR_DAO.getEverything();
+        return offer.orElseThrow(NonExistentCustomerException::new);
     }
 
 }
